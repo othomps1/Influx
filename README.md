@@ -24,7 +24,7 @@ Fonts: Playfair Display & Roboto Condensed (example below)
 CSS -
 font-family: 'Playfair Display', serif;
 font-family: 'Roboto Condensed', sans-serif;
-
+```
 
 ### Planning
 
