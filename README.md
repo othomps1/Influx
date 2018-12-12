@@ -45,3 +45,7 @@ https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa
 - Auth
   - POST /api/users - Create new user
   - POST /api/users/:id - User login
+
+### API
+
+https://newsapi.org/
