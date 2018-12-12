@@ -53,4 +53,3 @@ font-family: 'Roboto Condensed', sans-serif;
 - Auth
   - POST /api/signup - Create new user
   - POST /api/login - User login
-
