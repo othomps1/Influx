@@ -38,9 +38,10 @@ https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa
 
 - Users
   - GET /api/users/:id - Return user filter preferences
-  - PATCH /api/users/id - Update user account with filter preferences
+  - POST /api/filter/:id - Update user account with filter preferences
+  - DELETE /api/filter/:id - Delete filter preferences
   - DELETE /api/users/:id - Delete a user account
 
 - Auth
-  - POST /api/signup - Create new user
-  - POST /api/login - User login
+  - POST /api/users - Create new user
+  - POST /api/users/:id - User login
