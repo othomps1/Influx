@@ -48,4 +48,4 @@ https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa
 
 ### API
 
-https://newsapi.org/
+https://newsapi.org
