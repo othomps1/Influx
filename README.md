@@ -38,9 +38,9 @@ https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa
 
 - Users
   - GET /api/users/:id - Return user info
-  - GET /api/users/id:/user_filters - Retrieve data linked to user preferences
-  - GET /api/users/id:/saved - Retrieve users saved stories
-  - PATCH /api/users/id - Update user account
+  - GET /api/users/:id/user_filters - Retrieve data linked to user preferences
+  - GET /api/users/:id/saved - Retrieve users saved stories
+  - PATCH /api/users/:id - Update user account
   - DELETE /api/users/:id - Delete a user account
 
 - Auth
