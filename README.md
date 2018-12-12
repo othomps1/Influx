@@ -32,7 +32,7 @@ font-family: 'Roboto Condensed', sans-serif;
 
 
 ### Schema/ERD for Database
-[https://www.lucidchart.com/documents/edit/37236b26-8ef3-4dbc-906b-642f7ed653b7/0?shared=true&]
+https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa09
 
 ### Server Routes Plan
 
