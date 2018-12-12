@@ -9,19 +9,18 @@
 
 ### A style guide
 
-[Color Scheme](http://coolors.co/220901-621708-941b0c-bc3908-f6aa1c)
+[Color Scheme](https://coolors.co/28262c-809bce-f9f5ff-9fbbcc-7a9cc6)
 ```
 /* RGB */
-$color1: rgba(34, 9, 1, 1);
-$color2: rgba(98, 23, 8, 1);
-$color3: rgba(148, 27, 12, 1); //main
-$color4: rgba(188, 57, 8, 1);
-$color5: rgba(246, 170, 28, 1);
+$color1: #28262c; //font
+$color2: #809bce; //main background
+$color3: f9f5ff; //story backgrounds
 ```
 
-Fonts: Oswald & Quattrocento (example below)
+Fonts: Playfair Display & Roboto Condensed (example below)
 ```
-<link href="https://fonts.googleapis.com/css?family=Oswald|Quattrocento" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto+Condensed" rel="stylesheet">
+
 ```
 or
 ```
@@ -31,7 +30,8 @@ or
 ```
 
 CSS -
-font-family: 'blank', sans-serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Roboto Condensed', sans-serif;
 
 
 ### Planning
