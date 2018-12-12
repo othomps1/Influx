@@ -20,7 +20,6 @@ $color3: f9f5ff; //story backgrounds
 Fonts: Playfair Display & Roboto Condensed (example below)
 ```
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto+Condensed" rel="stylesheet">
-
 ```
 or
 ```
