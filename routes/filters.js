@@ -39,12 +39,8 @@ router.delete('/filters/:id', (req, res, next) => {
         return next()
       }
       const filter = filters[0]
-<<<<<<< HEAD
       // delete filter.id
-=======
-
       delete filter.id
->>>>>>> acb25fcbb0cf0ded9db0c2867b1fb4b195741676
       res.send(filter)
     })
     .catch((err) => {
