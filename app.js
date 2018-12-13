@@ -2,9 +2,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 var filtersRouter = require('./routes/filters');
 var usersRouter = require('./routes/users');
+var tokenRouter = require('./routes/token');
+// var users_filtersRouter = require('./routes/users_filters')
 
 var app = express();
 
@@ -14,7 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/filters', indexRouter);
+app.use('/filters', filtersRouter);
 app.use('/users', usersRouter);
+app.use('/token', tokenRouter);
 
 module.exports = app;
