@@ -1,4 +1,3 @@
-'use strict'
 
 const express = require('express')
 const knex = require('../knex.js')
@@ -8,17 +7,17 @@ const router = express.Router()
 
 router.post('/', (req, res, next) => {
   if(!req.body.username||!req.body.username.trim()){
-    next({
+    res.json({
       status: 404,
       message: 'must have a username!'
     })
   } else if (!req.body.email||!req.body.email.trim()) {
-    next({
+    res.json({
       status: 404,
       message: 'must have an email!'
     })
   } else if (!req.body.password||!req.body.password.trim()) {
-    next({
+    res.json({
       status: 404,
       message: 'must have an password!'
   })}
@@ -58,12 +57,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   return knex('users')
-    .select('*')
-    .where({
-      id: req.body.id,
-      username: req.body.username,
-      email: req.body.email
-    })
+    .select('id','username','email')
     .then((users) => {
       res.status(200).json(users)
     })
@@ -71,5 +65,21 @@ router.get('/', (req, res, next) => {
       next(err)
     })
 })
+
+router.delete('/:id', (req, res, next) => {
+  return knex('users')
+    .where({
+      id: req.params.id
+    })
+    .del()
+    .returning(['id','username','email'])
+    .then((users) => {
+      res.status(200).json(users[0])
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 
 module.exports = router

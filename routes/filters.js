@@ -11,6 +11,13 @@ router.post('/', (req, res, next) => {
     })
 })
 
+router.get('/', (req, res, next) => {
+  knex('filters')
+    .then(data => {
+      res.send(data)
+    })
+})
+
 router.delete('/filters/:id', (req, res, next) => {
   return knex('filters')
     .where('id', req.params.id)
