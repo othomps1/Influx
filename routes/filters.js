@@ -1,20 +1,9 @@
+
 'use strict'
 
 var express = require('express')
 var router = express.Router()
 let knex = require('../knex')
-
-/* GET home page. */
-
-router.get('/', (req, res, next) => {
-  knex('filters')
-    .then((filter) => {
-      res.send(filter)
-    })
-    .catch((err) => {
-      next(err)
-    })
-})
 
 router.post('/', (req, res, next) => {
   knex('filters')
@@ -40,7 +29,6 @@ router.delete('/filters/:id', (req, res, next) => {
       }
       const filter = filters[0]
       // delete filter.id
-      delete filter.id
       res.send(filter)
     })
     .catch((err) => {
