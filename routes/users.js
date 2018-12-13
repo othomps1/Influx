@@ -7,6 +7,18 @@ const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 router.post('/', (req, res, next) => {
+  if(!req.body.username||!req.body.username.trim()){
+    next({
+      status: 404,
+      message: 'must have a username!'
+    })
+  } else if (!req.body.email||!req.body.email.trim()) {
+    next({
+      status: 404,
+      message: 'must have an email!'
+    })
+  }
+  
   return knex('users')
     .where({
       username: req.body.username,

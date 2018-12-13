@@ -50,14 +50,14 @@ router.post('/', (req, res, next) => {
         else {
           next({
             status: 400,
-            message: 'Incorrect password.'
+            message: 'Invalid email or password.'
           })
         }
       }
       else {
         next({
           status: 400,
-          message: 'Invalid email.'
+          message: 'Invalid email or password.'
         })
       }
     })
