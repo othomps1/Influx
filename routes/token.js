@@ -4,10 +4,18 @@ const express = require('express')
 const knex = require('../knex.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-
 const router = express.Router()
 
-router.get('/token', (req, res) => {
+const jwtPayload = (user)=>{
+  const payload = {
+  id: user.id,
+  username: user.username,
+  email: user.email
+  }
+  return payload
+}
+
+router.get('/', (req, res) => {
   if (!req.cookies.token) {
     res.json(false)
   }
@@ -16,7 +24,7 @@ router.get('/token', (req, res) => {
   }
 })
 
-router.post('/token', (req, res, next) => {
+router.post('/', (req, res, next) => {
   knex('users')
     .where({
       email: req.body.email
@@ -25,13 +33,10 @@ router.post('/token', (req, res, next) => {
     .first()
     .then((user) => {
       if (user) {
-        const payload = {
-          id: user.id,
-          username: user.username,
-          email: user.email
-        }
+        const payload = jwtPayload(user)
+        const isRightPW = bcrypt.compareSync(req.body.password, user.hashed_password)
 
-        if (bcrypt.compareSync(req.body.password, user.hashed_password)) {
+        if (isRightPW) {
           const secretkey = process.env.JWT_KEY
           const token = jwt.sign(payload, secretkey)
           res.cookie('token', token, {
@@ -58,7 +63,7 @@ router.post('/token', (req, res, next) => {
     })
 })
 
-router.delete('/token', (req, res) => {
+router.delete('/', (req, res) => {
   res.clearCookie('token')
   res.end()
 })
