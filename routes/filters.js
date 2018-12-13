@@ -3,9 +3,19 @@
 var express = require('express')
 var router = express.Router()
 let knex = require('../knex')
-const { camelizeKeys } = require('humps')
 
 /* GET home page. */
+
+router.get('/', (req, res, next) => {
+  knex('filters')
+    .then((filter) => {
+      res.send(filter)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 router.post('/', (req, res, next) => {
   knex('filters')
     .then(data => {
@@ -24,7 +34,7 @@ router.delete('/filters/:id', (req, res, next) => {
       const filter = filters[0]
 
       delete filter.id
-      res.send(camelizeKeys(filter))
+      res.send(filter)
     })
     .catch((err) => {
       next(err)

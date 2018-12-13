@@ -1,6 +1,6 @@
 
 # News-Filtering-App
-# Digital Dose
+# Influx
 
 [Deployed link](http://google.com/)
 
