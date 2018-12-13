@@ -17,8 +17,15 @@ router.post('/', (req, res, next) => {
       status: 404,
       message: 'must have an email!'
     })
-  }
-  
+  } else if (!req.body.password||!req.body.password.trim()) {
+    next({
+      status: 404,
+      message: 'must have an password!'
+  })}
+
+  req.body.username = req.body.username.toLowerCase()
+  req.body.email = req.body.email.toLowerCase()
+
   return knex('users')
     .where({
       username: req.body.username,
