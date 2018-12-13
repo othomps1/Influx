@@ -39,6 +39,12 @@ router.post('/', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   return knex('users')
+    .select('*')
+    .where({
+      id: req.body.id,
+      username: req.body.username,
+      email: req.body.email
+    })
     .then((users) => {
       res.status(200).json(users)
     })
