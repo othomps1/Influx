@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 // eslint-disable-next-line new-cap
 const router = express.Router()
 
-router.post('/users', (req, res, next) => {
+router.post('/', (req, res, next) => {
   return knex('users')
     .insert({
       username: req.body.username,
@@ -20,6 +20,16 @@ router.post('/users', (req, res, next) => {
         username: user[0].username,
         email: user[0].email
       })
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
+router.get('/', (req, res, next) => {
+  return knex('users')
+    .then((users) => {
+      res.status(200).json(users)
     })
     .catch((err) => {
       next(err)
