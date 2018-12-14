@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
-router.delete('/filters/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   return knex('filters')
     .where('id', req.params.id)
     .del('*')

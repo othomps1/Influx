@@ -66,6 +66,22 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.get('/:id', (req, res, next) => {
+  return knex('users')
+    .join('user_filters', 'users.id', 'user_filters.user_id')
+    .rightJoin('filters', 'user_filters.filter_id','filters.id')
+    .where({'users.id':req.params.id})
+    .select('users.id','users.username','users.email','user_filters.filter_id')
+    .then((users) => {
+      if(users){
+        res.status(200).json(users)
+      }
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 router.delete('/:id', (req, res, next) => {
   return knex('users')
     .where({
