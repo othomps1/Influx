@@ -1,18 +1,30 @@
 
 'use strict'
 
-let express = require('express')
-let router = express.Router()
-let knex = require('../knex')
-let axios = require('axios')
+const express = require('express')
+const router = express.Router()
+const knex = require('../knex')
+const axios = require('axios')
 
 router.post('/', (req, res, next) => {
   knex('filters')
-  .insert({
-    filter: req.body.filter.toLowerCase()
-  })
+    .select('filter')
+    .where({
+      filter: req.body.filter.toLowerCase()
+    })
     .then(data => {
-      res.send(data)
+      if (!data) {
+        knex('filters')
+          .insert({
+            filter: req.body.filter.toLowerCase()
+          })
+          .returning('*')
+          .then(data => {
+            res.send(data[0])
+          })
+      } else {
+        res.send('filter already exists')
+      }
     })
 })
 
