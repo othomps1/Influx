@@ -5,22 +5,36 @@ const express = require('express')
 const router = express.Router()
 const knex = require('../knex')
 const axios = require('axios')
+const jwt = require('jsonwebtoken')
 
 router.post('/', (req, res, next) => {
+  if (!req.body['filter']) { res.status(404).send('must include filter')}
   knex('filters')
     .select('filter')
     .where({
       filter: req.body.filter.toLowerCase()
     })
     .then(data => {
-      if (!data) {
+      if (!data[0]) {
         knex('filters')
           .insert({
             filter: req.body.filter.toLowerCase()
           })
           .returning('*')
           .then(data => {
-            res.send(data[0])
+            const secretkey = process.env.JWT_KEY
+            jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+              knex('user_filters')
+              .insert({
+                filter_id: data[0].id,
+                user_id: decode.id
+              })
+              .returning('*')
+              .then(user_filter=>{
+                console.log(user_filter[0])
+                res.send(data[0])
+              })
+            })
           })
       } else {
         res.send('filter already exists')
