@@ -1,12 +1,16 @@
 
 'use strict'
 
-var express = require('express')
-var router = express.Router()
+let express = require('express')
+let router = express.Router()
 let knex = require('../knex')
+let axios = require('axios')
 
 router.post('/', (req, res, next) => {
   knex('filters')
+  .insert({
+    filter: req.body.filter.toLowerCase()
+  })
     .then(data => {
       res.send(data)
     })
@@ -19,7 +23,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
-router.delete('/filters/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   return knex('filters')
     .where('id', req.params.id)
     .del('*')
