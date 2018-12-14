@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 router.post('/', (req, res, next) => {
   if (!req.body['filter']) { res.status(404).send('must include filter')}
   knex('filters')
-    .select('filter')
+    .select('filter','id')
     .where({
       filter: req.body.filter.toLowerCase()
     })
@@ -37,7 +37,19 @@ router.post('/', (req, res, next) => {
             })
           })
       } else {
-        res.send('filter already exists')
+        const secretkey = process.env.JWT_KEY
+        jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+          knex('user_filters')
+          .insert({
+            filter_id: data[0].id,
+            user_id: decode.id
+          })
+          .returning('*')
+          .then(user_filter=>{
+            console.log(user_filter[0])
+            res.send(data[0])
+          })
+        })
       }
     })
 })
