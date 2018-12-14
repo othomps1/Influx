@@ -74,13 +74,15 @@ router.get('/:id', (req, res, next) => {
         allFilters.push(userFilter['filter'])
         return allFilters
       },[])
-      if(users){
+      if(users.filters){
         res.status(200).json({
           id: users[0].id,
           username: users[0].username,
           email: users[0].email,
           filters: filters
         })
+      } else if(users) {
+
       }
     })
     .catch((err) => {
