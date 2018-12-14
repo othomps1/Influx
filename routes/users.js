@@ -22,9 +22,6 @@ router.post('/', (req, res, next) => {
       message: 'must have an password!'
   })}
 
-  req.body.username = req.body.username.toLowerCase()
-  req.body.email = req.body.email.toLowerCase()
-
   return knex('users')
     .where({
       username: req.body.username,
@@ -36,8 +33,8 @@ router.post('/', (req, res, next) => {
       else {
         return knex('users')
         .insert({
-          username: req.body.username,
-          email: req.body.email,
+          username: req.body.username.toLowerCase(),
+          email: req.body.email.toLowerCase(),
           hashed_password: bcrypt.hashSync(req.body.password, 1)
         }, '*')
         .then((user) => {
@@ -71,10 +68,19 @@ router.get('/:id', (req, res, next) => {
     .join('user_filters', 'users.id', 'user_filters.user_id')
     .rightJoin('filters', 'user_filters.filter_id','filters.id')
     .where({'users.id':req.params.id})
-    .select('users.id','users.username','users.email','user_filters.filter_id')
+    .select('users.id','users.username','users.email','filters.filter')
     .then((users) => {
+      let filters = users.reduce((allFilters, userFilter)=>{
+        allFilters.push(userFilter['filter'])
+        return allFilters
+      },[])
       if(users){
-        res.status(200).json(users)
+        res.status(200).json({
+          id: users[0].id,
+          username: users[0].username,
+          email: users[0].email,
+          filters: filters
+        })
       }
     })
     .catch((err) => {
