@@ -6,15 +6,17 @@ const check = function() {
   const confirm = document.querySelector('#exampleInputPassword2').value
   if (pass == confirm) {
     document.getElementById('message2').style.color = 'white';
-    letSubmit = true
+    passMatch = true
   } else {
     document.getElementById('message2').style.color = 'red';
-    letSubmit = false
+    passMatch = false
   }
   if (pass.length >= 8) {
     document.getElementById('message1').style.color = 'white';
+    passLength = true
   } else {
     document.getElementById('message1').style.color = 'red';
+    passLength = false
   }
 }
 
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const submitUser = document.querySelector('#submitButton')
   submitUser.addEventListener('submit', (event) => {
     event.preventDefault()
-    if(letSubmit){
+    if(passLength && passMatch){
       let user = {}
       user.username = form.exampleUserName1.value
       user.email = form.exampleInputEmail1.value
@@ -31,6 +33,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .then( results => {
         console.log(results.data);
       })
+    } else {
+      event.preventDefault()
+      console.log('password invalid')
     }
   })
 });
