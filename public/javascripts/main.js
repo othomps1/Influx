@@ -8,9 +8,3 @@ var check = function() {
     document.getElementById('message').style.color = 'red';
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
-  let submit = document.querySelector('.submit')
-  submit.addEventListener('click', (event) => {
-    console.log('submit')
-  })
-})
