@@ -5,21 +5,29 @@ const express = require('express')
 const router = express.Router()
 const knex = require('../knex')
 const axios = require('axios')
+const jwt = require('jsonwebtoken')
 
 router.post('/', (req, res, next) => {
+  if (!req.body.filter) { res.status(404).send('must include filter') }
   knex('filters')
     .select('filter')
     .where({
       filter: req.body.filter.toLowerCase()
     })
     .then(data => {
-      if (!data) {
+      if (!data[0]) {
         knex('filters')
           .insert({
             filter: req.body.filter.toLowerCase()
+
           })
           .returning('*')
           .then(data => {
+            knex('user_filters')
+            .insert({
+              filter: req.body.filter.toLowerCase()
+              .where()
+            })
             res.send(data[0])
           })
       } else {
