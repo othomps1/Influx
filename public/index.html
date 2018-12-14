@@ -5,7 +5,8 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="javascripts/main.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="javascripts/createUser.js" charset="utf-8"></script>
 </head>
 
 <body class="" style="background-color: #ffffff;">
@@ -33,14 +34,14 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="exampleInputPassword1" minlength="8" placeholder="Password" onkeyup='check();' required>
           <ul class="my-1">
-            <li><p>Password must be longer than 8 characters</p></li>
+            <li><p id="message1">Password must be longer than 8 characters</p></li>
           </ul>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword2">Confirm Password</label>
           <input type="password" class="form-control" id="exampleInputPassword2" minlength="8" placeholder="Confirm Password" onkeyup='check();' required>
           <ul class="my-1">
-            <li><p id="message">Passwords must match</p></li>
+            <li><p id="message2">Passwords must match</p></li>
           </ul>
         </div>
         <div class="col-12">
