@@ -68,4 +68,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 })
-// DOMContent end
