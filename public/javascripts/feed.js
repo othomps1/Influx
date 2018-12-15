@@ -61,28 +61,36 @@ const updateFeed = (userInfo) =>{
   })
 }
 
-  const addFilter = (userInfo) =>{
-    return  axios({
-        method: 'post',
-        url: '/filters',
-        data: userInfo
-      })
-    }
+updateFeed({
+  filter: 'usa'
+})
 
-  const checkLoggedIn = () =>{
-      return axios({
-          method: 'get',
-          url: '/login',
-      })
-    }
+const addFilter = (userInfo) =>{
+  return  axios({
+      method: 'post',
+      url: '/filters',
+      data: userInfo
+    })
+  }
+
+const getUserFilters = (userInfo) =>{
+
+  }
+
+const checkLoggedIn = () =>{
+    return axios({
+        method: 'get',
+        url: '/login'
+    })
+  }
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
-    list.innerHTML = ''
     const userSearch = document.querySelector('.searchBar')
     if (userSearch.value === '') {
       userSearch.placeholder = 'Please enter a Filter'
     } else {
+      list.innerHTML = ''
       let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
