@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const updateFeed = (userInfo) =>{
+const list = document.querySelector('.list')
 
+const updateFeed = (userInfo) =>{
   axios({
     method: 'post',
     url: '/news',
     data: userInfo
   })
   .then((response) => {
+    console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -55,49 +57,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
   .catch((err) => {
-    console.log('BROKEN')
+    console.log(err)
   })
-  }
+}
 
-  const addFilter = (filter) =>{
+  const addFilter = (userInfo) =>{
     return  axios({
         method: 'post',
         url: '/filters',
-        data: filter
+        data: userInfo
       })
     }
 
   const checkLoggedIn = () =>{
-      let isLoggedIn = false
-      axios({
+      return axios({
           method: 'get',
           url: '/login',
       })
-      .then(result=>{
-        isLoggedIn = result.data
-      })
-      return isLoggedIn
     }
-    
+
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
-    let list = document.querySelector('.list')
     list.innerHTML = ''
-    let userSearch = document.querySelector('.searchBar')
+    const userSearch = document.querySelector('.searchBar')
     if (userSearch.value === '') {
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       let userInfo = {}
       userInfo.filter = userSearch.value
-      if(checkLoggedIn()) {
-        addFilter(userInfo)
-        .then((response) => {
-          console.log(response.data)
-          updateFeed(userInfo)
-        })
-      } else {
-        alert("please login first")
-      }
+      checkLoggedIn()
+      .then(result=>{
+        if(result.data) {
+          addFilter(userInfo)
+          .then((response) => {
+            console.log("addFilter response.data", response)
+            updateFeed(userInfo)
+          })
+        } else {
+          alert("please login first")
+        }
+      })
+
 
     }
   })

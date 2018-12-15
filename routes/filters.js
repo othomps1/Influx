@@ -32,7 +32,7 @@ router.post('/', (req, res, next) => {
               })
               .returning('*')
               .then(user_filter=>{
-                console.log(data[0])
+                console.log("POST filters",data[0])
                 res.send(data[0])
               })
             })
@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
           })
           .returning('*')
           .then(user_filter=>{
-            console.log(data[0])
+            console.log("POST filters", data[0])
             res.send(data[0])
           })
         })

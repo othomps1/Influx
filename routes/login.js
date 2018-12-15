@@ -28,7 +28,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res, next) => {
   knex('users')
     .where({
-      email: req.body.email
+      email: req.body.email,
+      username: req.body.username
     })
     .select('*')
     .first()
