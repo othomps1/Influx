@@ -1,14 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('form').addEventListener('submit', (event) => {
-    event.preventDefault()
-    let list = document.querySelector('.list')
-    list.innerHTML = ''
-    let userSearch = document.querySelector('.searchBar')
-    if (userSearch.value === '') {
-      userSearch.placeholder = 'Please enter a Filter'
-    } else {
-      let userInfo = {}
-      userInfo.currentfilter = userSearch.value
+  const updateFeed = (userInfo) =>{
       axios({
         method: 'post',
         url: '/news',
@@ -64,6 +55,48 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch((err) => {
         console.log('BROKEN')
       })
+    }
+
+  const addFilter = (filter) =>{
+    return  axios({
+        method: 'post',
+        url: '/filters',
+        data: filter
+      })
+    }
+
+  const checkLoggedIn = () =>{
+      let isLoggedIn = false
+      axios({
+          method: 'get',
+          url: '/login',
+      })
+      .then(result=>{
+        isLoggedIn = result.data
+      })
+      return isLoggedIn
+    }
+
+  document.querySelector('form').addEventListener('submit', (event) => {
+    event.preventDefault()
+    let list = document.querySelector('.list')
+    list.innerHTML = ''
+    let userSearch = document.querySelector('.searchBar')
+    if (userSearch.value === '') {
+      userSearch.placeholder = 'Please enter a Filter'
+    } else {
+      let userInfo = {}
+      userInfo.filter = userSearch.value
+      if(checkLoggedIn()) {
+        addFilter(userInfo)
+        .then((response) => {
+          console.log(response.data)
+          updateFeed(userInfo)
+        })
+      } else {
+        alert("please login first")
+      }
+
     }
   })
 })

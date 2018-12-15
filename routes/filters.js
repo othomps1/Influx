@@ -8,17 +8,18 @@ const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
 router.post('/', (req, res, next) => {
-  if (!req.body['filter']) { res.status(404).send('must include filter')}
+  if (!req.body.filter) { res.status(404).send('must include filter')}
+  let filterToAdd = req.body.filter.toLowerCase().replace(/[\.\/,$#%^*()@&?:;\-+=_!~`"]+/g, "").trim("")
   knex('filters')
     .select('filter','id')
     .where({
-      filter: req.body.filter.toLowerCase()
+      filter: filterToAdd
     })
     .then(data => {
       if (!data[0]) {
         knex('filters')
           .insert({
-            filter: req.body.filter.toLowerCase()
+            filter: filterToAdd
           })
           .returning('*')
           .then(data => {
@@ -31,7 +32,7 @@ router.post('/', (req, res, next) => {
               })
               .returning('*')
               .then(user_filter=>{
-                console.log(user_filter[0])
+                console.log(data[0])
                 res.send(data[0])
               })
             })
@@ -46,7 +47,7 @@ router.post('/', (req, res, next) => {
           })
           .returning('*')
           .then(user_filter=>{
-            console.log(user_filter[0])
+            console.log(data[0])
             res.send(data[0])
           })
         })
