@@ -17,6 +17,7 @@ const jwtPayload = (user)=>{
 
 router.get('/', (req, res) => {
   if (!req.cookies.token) {
+    console.log(req.body)
     res.json(false)
   }
   else if (req.cookies.token) {
@@ -37,7 +38,7 @@ router.post('/', (req, res, next) => {
         const isRightPW = bcrypt.compareSync(req.body.password, user.hashed_password)
 
         if (isRightPW) {
-          const secretkey = process.env.JWT_KEY
+          const secretkey = '9lB727XCkUTgDTrjdvCztqhdOBs/ku5RpCws1J32NUYQMmr7d7jKZC3c574F3MrP Z94EjADMGFeCKBGYoxC3yg=='
           const token = jwt.sign(payload, secretkey)
           res.cookie('token', token, {
             httpOnly: true
@@ -48,14 +49,14 @@ router.post('/', (req, res, next) => {
           })
         }
         else {
-          next({
+          res.json({
             status: 400,
             message: 'Invalid email or password.'
           })
         }
       }
       else {
-        next({
+        res.json({
           status: 400,
           message: 'Invalid email or password.'
         })
