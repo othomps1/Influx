@@ -37,14 +37,22 @@ https://www.lucidchart.com/invitations/accept/9a331a84-0ff9-4d8b-9a5b-870fa65efa
 ### Server Routes Plan
 
 - Users
-  - GET /api/users/:id - Return user filter preferences
-  - POST /api/filter/:id - Update user account with filter preferences
+  - GET /api/users/:id - Return user info and filter preferences
+  - POST /api/filter - Update user account with filter preferences
   - DELETE /api/filter/:id - Delete filter preferences
   - DELETE /api/users/:id - Delete a user account
+  _ POST /api/news - Get news from NewsAPI.org api
+  
+- Admin
+  - GET /api/users Get all users information
+  - GET /api/users Get all filter information
 
 - Auth
   - POST /api/users - Create new user
-  - POST /api/users/:id - User login
+  - POST /api/login - User login
+  - GET /api/login - Check if user is logged in
+  - DELETE /api/login - User Logout
+
 
 ### API
 
