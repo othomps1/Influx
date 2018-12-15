@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.button').addEventListener('click', (event) => {
+  document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
     let list = document.querySelector('.list')
     list.innerHTML = ''
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       let userInfo = {}
       userInfo.currentfilter = userSearch.value
-      console.log(userInfo)
       axios({
         method: 'post',
         url: '/news',
