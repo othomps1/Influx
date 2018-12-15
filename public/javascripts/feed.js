@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       let userInfo = {}
       userInfo.currentfilter = userSearch.value
-      console.log(userInfo)
       axios({
         method: 'post',
         url: '/news',
         data: userInfo
       })
       .then((response) => {
+        console.log(response.data)
         for (var i = 0; i < response.data.articles.length; i++) {
           let newThread = document.createElement('li')
           let newImage = document.createElement('img')
