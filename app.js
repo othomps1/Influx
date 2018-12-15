@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 var filtersRouter = require('./routes/filters');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+var newsRouter = require('./routes/news');
 // var users_filtersRouter = require('./routes/users_filters')
 
 var app = express();
@@ -22,5 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/filters', filtersRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
+app.use('/news', newsRouter);
 
 module.exports = app;
