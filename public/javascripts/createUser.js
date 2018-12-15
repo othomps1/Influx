@@ -21,11 +21,6 @@ const check = function() {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelector('#image').addEventListener('click', () => {
-    window.location.href = 'feed.html'
-    console.log('click')
-  })
-
 
 
   const form = document.querySelector('form')
@@ -36,13 +31,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       user.username = form.exampleUserName1.value
       user.email = form.exampleInputEmail1.value
       user.password = form.exampleInputPassword1.value
-      window.location.href = 'feed.html'
+      window.location.href = 'login.html'
       axios.post('/users', user)
-      .then( results => {
-        console.log(results)
-      })
     } else {
-      event.preventDefault()
       console.log('password invalid')
     }
   })
