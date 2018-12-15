@@ -1,14 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.button').addEventListener('click', () => {
+  document.querySelector('.button').addEventListener('click', (event) => {
+    event.preventDefault()
     let list = document.querySelector('.list')
     list.innerHTML = ''
     let userSearch = document.querySelector('.searchBar')
     if (userSearch.value === '') {
       userSearch.placeholder = 'Please enter a Filter'
     } else {
-      axios.get(`https://newsapi.org/v2/everything?q=${userSearch.value}&from=2018-11-14&sortBy=publishedAt&apiKey=1d611d7f36184e07b0d4ba331add49db`)
+      let userInfo = {}
+      userInfo.currentfilter = userSearch.value
+      console.log(userInfo)
+      axios({
+        method: 'post',
+        url: '/news',
+        data: userInfo
+      })
       .then((response) => {
-        // console.log(response.data.articles)
         for (var i = 0; i < response.data.articles.length; i++) {
           let newThread = document.createElement('li')
           let newImage = document.createElement('img')
@@ -56,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log('BROKEN')
       })
     }
   })
