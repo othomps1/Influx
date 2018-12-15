@@ -21,17 +21,25 @@ const check = function() {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  const submitUser = document.querySelector('#submitButton')
-  submitUser.addEventListener('submit', (event) => {
+  document.querySelector('#image').addEventListener('click', () => {
+    window.location.href = 'feed.html'
+    console.log('click')
+  })
+
+
+
+  const form = document.querySelector('form')
+  form.addEventListener('submit', (event) => {
     event.preventDefault()
     if(passLength && passMatch){
       let user = {}
       user.username = form.exampleUserName1.value
       user.email = form.exampleInputEmail1.value
       user.password = form.exampleInputPassword1.value
+      window.location.href = 'feed.html'
       axios.post('/users', user)
       .then( results => {
-        console.log(results.data);
+        console.log(results)
       })
     } else {
       event.preventDefault()

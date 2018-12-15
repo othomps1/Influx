@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         data: userInfo
       })
       .then((response) => {
-        console.log(response.data)
         for (var i = 0; i < response.data.articles.length; i++) {
           let newThread = document.createElement('li')
           let newImage = document.createElement('img')
