@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  if (!checkLoggedIn()) {
+    document.querySelector('.logout').innerHTML = 'Login'
+  } else {
+    document.querySelector('.logout').innerHTML =
+  }
+
 const list = document.querySelector('.list')
 
 const updateFeed = (userInfo) =>{
@@ -9,7 +15,6 @@ const updateFeed = (userInfo) =>{
     data: userInfo
   })
   .then((response) => {
-    console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -98,7 +103,6 @@ const checkLoggedIn = () =>{
         if(result.data) {
           addFilter(userInfo)
           .then((response) => {
-            console.log("addFilter response.data", response)
             updateFeed(userInfo)
           })
         } else {
@@ -108,5 +112,9 @@ const checkLoggedIn = () =>{
 
 
     }
+  })
+  document.querySelector('.logout').addEventListener('click', () => {
+    axios.delete('/login')
+    window.location.href = '/login.html'
   })
 })

@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
         const isRightPW = bcrypt.compareSync(req.body.password, user.hashed_password)
 
         if (isRightPW) {
-          const secretkey = '9lB727XCkUTgDTrjdvCztqhdOBs/ku5RpCws1J32NUYQMmr7d7jKZC3c574F3MrP Z94EjADMGFeCKBGYoxC3yg=='
+          const secretkey = process.env.JWT_KEY
           const token = jwt.sign(payload, secretkey)
           res.cookie('token', token, {
             httpOnly: true
