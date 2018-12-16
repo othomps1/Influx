@@ -17,11 +17,14 @@ const jwtPayload = (user)=>{
 
 router.get('/', (req, res) => {
   if (!req.cookies.token) {
-    console.log(req)
     res.json(false)
   }
   else if (req.cookies.token) {
-    res.json(true)
+    const secretkey = process.env.JWT_KEY
+    jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+
+    res.json(decode)
+    })
   }
 })
 
