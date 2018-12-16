@@ -17,11 +17,14 @@ const jwtPayload = (user)=>{
 
 router.get('/', (req, res) => {
   if (!req.cookies.token) {
-    console.log(req.body)
     res.json(false)
   }
   else if (req.cookies.token) {
-    res.json(true)
+    const secretkey = process.env.JWT_KEY
+    jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+
+    res.json(decode)
+    })
   }
 })
 
@@ -39,7 +42,7 @@ router.post('/', (req, res, next) => {
         const isRightPW = bcrypt.compareSync(req.body.password, user.hashed_password)
 
         if (isRightPW) {
-          const secretkey = '9lB727XCkUTgDTrjdvCztqhdOBs/ku5RpCws1J32NUYQMmr7d7jKZC3c574F3MrP Z94EjADMGFeCKBGYoxC3yg=='
+          const secretkey = process.env.JWT_KEY
           const token = jwt.sign(payload, secretkey)
           res.cookie('token', token, {
             httpOnly: true
