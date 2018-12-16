@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const getUserInfo = (userInfomation) =>{
-    console.log(userInfomation)
     return  axios({
       method: 'get',
       url: `/users/${userInfomation.user_id}`
@@ -24,19 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const getUsername = () => {
-    return checkLoggedIn()
-    .then(response => {
-      console.log(response.data)
-      getUserInfo(response.data)
-      .then(results => {
-        console.log(results)
-        userInfo = results.data
-      })
-    })
-  }
+  const getUsername = getUserInfo(checkLoggedIn().user_id)
+  console.log(getUsername)
 
-  getUsername()
+  getUserInfo()
   if (!checkLoggedIn()) {
     document.querySelector('.logout').innerHTML = 'Login'
   } else {
@@ -116,6 +106,7 @@ updateFeed({
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       list.innerHTML = ''
+      let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
