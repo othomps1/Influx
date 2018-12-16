@@ -17,7 +17,7 @@ const jwtPayload = (user)=>{
 
 router.get('/', (req, res) => {
   if (!req.cookies.token) {
-    console.log(req.body)
+    console.log(req)
     res.json(false)
   }
   else if (req.cookies.token) {

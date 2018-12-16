@@ -1,9 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const addFilter = (userInfo) =>{
+    return  axios({
+      method: 'post',
+      url: '/filters',
+      data: userInfo
+    })
+  }
+
+  const getUserInfo = (userInfo) =>{
+    return  axios({
+      method: 'get',
+      url: `/users/${userInfo.user_id}`
+    })
+  }
+
+  const checkLoggedIn = () =>{
+    return axios({
+      method: 'get',
+      url: '/login'
+    })
+  }
+  
   if (!checkLoggedIn()) {
     document.querySelector('.logout').innerHTML = 'Login'
   } else {
-    document.querySelector('.logout').innerHTML =
+    document.querySelector('.logout').innerHTML = getUserInfo()
   }
 
 const list = document.querySelector('.list')
@@ -71,27 +93,6 @@ updateFeed({
 })
 
 
-const addFilter = (userInfo) =>{
-  return  axios({
-      method: 'post',
-      url: '/filters',
-      data: userInfo
-    })
-}
-
-const getUserInfo = (userInfo) =>{
-  return  axios({
-      method: 'get',
-      url: `/users/${userInfo.user_id}`
-    })
-}
-
-const checkLoggedIn = () =>{
-    return axios({
-        method: 'get',
-        url: '/login'
-    })
-}
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
