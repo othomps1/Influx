@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const addFilter = (userInfo) =>{
+  let userInfo = {}
+  const addFilter = (userInfomation2) =>{
     return  axios({
       method: 'post',
       url: '/filters',
-      data: userInfo
+      data: userInfomation2
     })
   }
 
-  const getUserInfo = (userInfo) =>{
+  const getUserInfo = (userInfomation) =>{
+    console.log(userInfomation)
     return  axios({
       method: 'get',
-      url: `/users/${userInfo.user_id}`
+      url: `/users/${userInfomation.user_id}`
     })
   }
 
@@ -21,20 +23,33 @@ document.addEventListener('DOMContentLoaded', () => {
       url: '/login'
     })
   }
-  
+
+  const getUsername = () => {
+    return checkLoggedIn()
+    .then(response => {
+      console.log(response.data)
+      getUserInfo(response.data)
+      .then(results => {
+        console.log(results)
+        userInfo = results.data
+      })
+    })
+  }
+
+  getUsername()
   if (!checkLoggedIn()) {
     document.querySelector('.logout').innerHTML = 'Login'
   } else {
-    document.querySelector('.logout').innerHTML = getUserInfo()
+    document.querySelector('.logout').innerHTML = userInfo.username
   }
 
 const list = document.querySelector('.list')
 
-const updateFeed = (userInfo) =>{
+const updateFeed = (userInfomation3) =>{
   axios({
     method: 'post',
     url: '/news',
-    data: userInfo
+    data: userInfomation3
   })
   .then((response) => {
     for (var i = 0; i < response.data.articles.length; i++) {
@@ -101,7 +116,6 @@ updateFeed({
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       list.innerHTML = ''
-      let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
@@ -111,7 +125,7 @@ updateFeed({
             userInfo['user_id'] = response.data.user_id
             getUserInfo(userInfo)
             .then(filterInfo=>{
-              console.log('getUsersInfo',filterInfo.data)
+              userInfo = filterInfo.data
             })
             updateFeed(userInfo)
           })

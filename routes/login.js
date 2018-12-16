@@ -23,7 +23,11 @@ router.get('/', (req, res) => {
     const secretkey = process.env.JWT_KEY
     jwt.verify(req.cookies.token, secretkey, (err, decode) => {
 
-    res.json(decode)
+    res.json({
+      user_id: decode.id,
+      username: decode.username,
+      email: decode.email
+    })
     })
   }
 })
