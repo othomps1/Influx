@@ -70,24 +70,28 @@ updateFeed({
   filter: 'usa'
 })
 
+
 const addFilter = (userInfo) =>{
   return  axios({
       method: 'post',
       url: '/filters',
       data: userInfo
     })
-  }
+}
 
-const getUserFilters = (userInfo) =>{
-
-  }
+const getUserInfo = (userInfo) =>{
+  return  axios({
+      method: 'get',
+      url: `/users/${userInfo.user_id}`
+    })
+}
 
 const checkLoggedIn = () =>{
     return axios({
         method: 'get',
         url: '/login'
     })
-  }
+}
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
@@ -103,14 +107,17 @@ const checkLoggedIn = () =>{
         if(result.data) {
           addFilter(userInfo)
           .then((response) => {
+            userInfo['user_id'] = response.data.user_id
+            getUserInfo(userInfo)
+            .then(filterInfo=>{
+              console.log('getUsersInfo',filterInfo.data)
+            })
             updateFeed(userInfo)
           })
         } else {
           alert("please login first")
         }
       })
-
-
     }
   })
   document.querySelector('.logout').addEventListener('click', () => {
