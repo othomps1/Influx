@@ -104,7 +104,7 @@ const checkLoggedIn = () =>{
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
-        if(result.data) {
+        if(result) {
           addFilter(userInfo)
           .then((response) => {
             userInfo['user_id'] = response.data.user_id
