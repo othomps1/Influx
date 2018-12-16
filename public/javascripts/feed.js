@@ -9,7 +9,7 @@ const updateFeed = (userInfo) =>{
     data: userInfo
   })
   .then((response) => {
-    console.log("updateFeed response.data", response.data)
+    // console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -65,24 +65,28 @@ updateFeed({
   filter: 'usa'
 })
 
+
 const addFilter = (userInfo) =>{
   return  axios({
       method: 'post',
       url: '/filters',
       data: userInfo
     })
-  }
+}
 
-const getUserFilters = (userInfo) =>{
-  
-  }
+const getUserInfo = (userInfo) =>{
+  return  axios({
+      method: 'get',
+      url: `/users/${userInfo.user_id}`
+    })
+}
 
 const checkLoggedIn = () =>{
     return axios({
         method: 'get',
         url: '/login'
     })
-  }
+}
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
@@ -98,15 +102,17 @@ const checkLoggedIn = () =>{
         if(result.data) {
           addFilter(userInfo)
           .then((response) => {
-            console.log("addFilter response.data", response)
+            userInfo['user_id'] = response.data.user_id
+            getUserInfo(userInfo)
+            .then(filterInfo=>{
+              console.log('getUsersInfo',filterInfo.data)
+            })
             updateFeed(userInfo)
           })
         } else {
           alert("please login first")
         }
       })
-
-
     }
   })
 })

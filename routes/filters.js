@@ -22,18 +22,18 @@ router.post('/', (req, res, next) => {
             filter: filterToAdd
           })
           .returning('*')
-          .then(data => {
+          .then(filterData => {
+            console.log(filterData[0])
             const secretkey = process.env.JWT_KEY
             jwt.verify(req.cookies.token, secretkey, (err, decode) => {
               knex('user_filters')
               .insert({
-                filter_id: data[0].id,
+                filter_id: filterData[0].id,
                 user_id: decode.id
               })
               .returning('*')
-              .then(user_filter=>{
-                console.log("POST filters",data[0])
-                res.send(data[0])
+              .then(userFilter=>{
+                res.send(userFilter[0])
               })
             })
           })
@@ -47,8 +47,7 @@ router.post('/', (req, res, next) => {
           })
           .returning('*')
           .then(user_filter=>{
-            console.log("POST filters", data[0])
-            res.send(data[0])
+            res.send(user_filter[0])
           })
         })
       }
