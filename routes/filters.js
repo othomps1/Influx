@@ -7,32 +7,49 @@ const knex = require('../knex')
 const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
+const createUserFilter = (createdFilter, user) =>{
+  console.log('createdFilter:',createdFilter,'user:',user)
+  return knex('user_filters')
+  .insert({
+    filter_id: createdFilter.id,
+    user_id: user.id
+  })
+  .returning('*')
+}
+
 router.post('/', (req, res, next) => {
-  if (!req.body['filter']) { res.status(404).send('must include filter')}
+  if (!req.body.filter) { res.status(404).send('must include filter')}
+  let filterToAdd = req.body.filter.toLowerCase().replace(/[\.\/,$#%^*()@&?:;\-+=_!~`"]+/g, "").trim("")
   knex('filters')
     .select('filter','id')
     .where({
-      filter: req.body.filter.toLowerCase()
+      filter: filterToAdd
     })
     .then(data => {
       if (!data[0]) {
         knex('filters')
           .insert({
-            filter: req.body.filter.toLowerCase()
+            filter: filterToAdd
           })
           .returning('*')
-          .then(data => {
+          .then(filterData => {
             const secretkey = process.env.JWT_KEY
             jwt.verify(req.cookies.token, secretkey, (err, decode) => {
               knex('user_filters')
-              .insert({
-                filter_id: data[0].id,
+              .select('*')
+              .where({
+                filter_id: filterData[0].id,
                 user_id: decode.id
               })
-              .returning('*')
-              .then(user_filter=>{
-                console.log(user_filter[0])
-                res.send(data[0])
+              .then(record =>{
+                if(record[0]){
+                  res.send(record[0])
+                } else {
+                  createUserFilter(filterData[0], decode)
+                  .then(userFilter=>{
+                      res.send(userFilter[0])
+                    })
+                }
               })
             })
           })
@@ -40,14 +57,20 @@ router.post('/', (req, res, next) => {
         const secretkey = process.env.JWT_KEY
         jwt.verify(req.cookies.token, secretkey, (err, decode) => {
           knex('user_filters')
-          .insert({
+          .select('*')
+          .where({
             filter_id: data[0].id,
             user_id: decode.id
           })
-          .returning('*')
-          .then(user_filter=>{
-            console.log(user_filter[0])
-            res.send(data[0])
+          .then(record =>{
+            if(record[0]){
+              res.send(record[0])
+            } else {
+              createUserFilter(data[0], decode)
+              .then(userFilter=>{
+                res.send(userFilter[0])
+                })
+            }
           })
         })
       }
@@ -70,7 +93,6 @@ router.delete('/:id', (req, res, next) => {
         return next()
       }
       const filter = filters[0]
-      // delete filter.id
       res.send(filter)
     })
     .catch((err) => {

@@ -1,10 +1,11 @@
 
-
 const express = require('express')
 const knex = require('../knex.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
+
+let userInfo = {}
 
 const jwtPayload = (user)=>{
   const payload = {
@@ -20,14 +21,22 @@ router.get('/', (req, res) => {
     res.json(false)
   }
   else if (req.cookies.token) {
-    res.json(true)
+    const secretkey = process.env.JWT_KEY
+    jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+    res.json({
+       user_id: decode.id,
+       username: decode.username,
+       email: decode.email
+    })
+    })
   }
 })
 
 router.post('/', (req, res, next) => {
   knex('users')
     .where({
-      email: req.body.email
+      email: req.body.email,
+      username: req.body.username.toLowerCase()
     })
     .select('*')
     .first()
@@ -48,14 +57,14 @@ router.post('/', (req, res, next) => {
           })
         }
         else {
-          next({
+          res.json({
             status: 400,
             message: 'Invalid email or password.'
           })
         }
       }
       else {
-        next({
+        res.json({
           status: 400,
           message: 'Invalid email or password.'
         })

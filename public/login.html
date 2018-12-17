@@ -1,12 +1,13 @@
 <html>
 
 <head>
-  <title>Express</title>
+  <title>Login Page</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
+  <link rel="shortcut icon" href="images/instagram_profile_image.png"/>
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="javascripts/main.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="javascripts/login.js" charset="utf-8"></script>
 </head>
 
 <body class="" style="background-color: #ffffff;">
@@ -16,6 +17,11 @@
     </div>
   </div>
   <div class="container my-5">
+    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff;">
+      <p class="text-center">Login Below.</p>
+    </div>
+  </div>
+  <div class="container mt-5">
     <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff;">
       <form style="font-family: 'Playfair Display', serif;">
         <br>
@@ -32,12 +38,20 @@
         <br>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" minlength="8" placeholder="Password" required>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+        </div>
+        <div class="errTextDiv">
+
         </div>
         <div class="col">
-          <button type="submit" id="submitButton" formaction="feed.html" class="mx-auto container-fluid submit my-3 btn btn-primary" style="max-width:100%;"><p>Login</p></button>
+          <button type="submit" id="submitButton" class="mx-auto container-fluid submit my-3 btn btn-primary" style="max-width:100%;"><p>Login</p></button>
         </div>
       </form>
+    </div>
+  </div>
+  <div class="container mb-5">
+    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff;">
+      Don't have an Account? <a href="/">Click Here</a>
     </div>
   </div>
 
