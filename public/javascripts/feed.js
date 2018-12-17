@@ -30,39 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const getUsername = () => {
     return checkLoggedIn()
     .then(response => {
-      // console.log(response.data)
       getUserInfo(response.data)
       .then(results => {
         console.log('test',results.data)
-        // userInfo = {
-        //   user_id: results.data.user_id,
-        //   username: results.data.username,
-        //   email: results.data.email
-        // }
         userInfo.user_id = results.data.user_id
         userInfo.username = results.data.username
         userInfo.email = results.data.email
         userInfo.filters = results.data.filters
-        console.log(userInfo.filters)
         filterArray = userInfo.filters
         console.log(filterArray)
+        if (!checkLoggedIn()) {
+          document.querySelector('.username1').innerHTML = 'Login'
+        } else {
+          console.log(userInfo)
+          document.querySelector('.username1').innerHTML = `${userInfo.username}`
+        }
+        for (var i = 0; i < filterArray.length; i++) {
+          console.log(filterArray[i])
+        }
       })
     })
   }
-
-  getUsername()
-    .then(resultss => {
-      if (!checkLoggedIn()) {
-        document.querySelector('.logout').innerHTML = 'Login'
-      } else {
-        console.log(userInfo)
-        document.querySelector('.logout').innerHTML = `${userInfo.username}`
-      }
-    }
-  )
-  for (var i = 0; i < filterArray.length; i++) {
-      console.log(filterArray[i])
-    }
+getUsername()
 
 const list = document.querySelector('.list')
 
