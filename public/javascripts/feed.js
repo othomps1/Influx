@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
           newButton.innerHTML = 'Visit Article page'
         }
         newThread.className = 'media listItem my-2 rounded mx-2'
-        newHead.className = 'mt-2 mb-1'
+        newHead.className = 'my-2'
         newDiv.className = 'media-body'
         newImage.className = 'mx-3 my-3 rounded'
         newImage.style = 'max-height: 30%; max-width: 30%;'
