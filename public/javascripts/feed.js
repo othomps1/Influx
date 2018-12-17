@@ -1,15 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  let userInfo = {}
+  const addFilter = (userInfomation2) =>{
+    return  axios({
+      method: 'post',
+      url: '/filters',
+      data: userInfomation2
+    })
+  }
+
+  const getUserInfo = (userInfomation) =>{
+    console.log(userInfomation)
+    return  axios({
+      method: 'get',
+      url: `/users/${userInfomation.user_id}`
+    })
+  }
+
+  const checkLoggedIn = () =>{
+    return axios({
+      method: 'get',
+      url: '/login'
+    })
+  }
+
+  const getUsername = () => {
+    return checkLoggedIn()
+    .then(response => {
+      console.log(response.data)
+      getUserInfo(response.data)
+      .then(results => {
+        console.log(results)
+        userInfo = results.data
+      })
+    })
+  }
+
+  getUsername()
+  if (!checkLoggedIn()) {
+    document.querySelector('.logout').innerHTML = 'Login'
+  } else {
+    document.querySelector('.logout').innerHTML = userInfo.username
+  }
+
 const list = document.querySelector('.list')
 
-const updateFeed = (userInfo) =>{
+const updateFeed = (userInfomation3) =>{
   axios({
     method: 'post',
     url: '/news',
-    data: userInfo
+    data: userInfomation3
   })
   .then((response) => {
-    console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -65,7 +107,6 @@ updateFeed({
   filter: 'news'
 })
 
-
 const addFilter = (userInfo) =>{
   return  axios({
       method: 'post',
@@ -95,7 +136,6 @@ const checkLoggedIn = () =>{
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       list.innerHTML = ''
-      let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
@@ -106,6 +146,7 @@ const checkLoggedIn = () =>{
             getUserFilters(userInfo)
             .then(filterInfo=>{
               console.log('getUserFilters',filterInfo.data)
+              userInfo = filterInfo.data
             })
             updateFeed(userInfo)
           })
@@ -114,5 +155,9 @@ const checkLoggedIn = () =>{
         }
       })
     }
+  })
+  document.querySelector('.logout').addEventListener('click', () => {
+    axios.delete('/login')
+    window.location.href = '/login.html'
   })
 })

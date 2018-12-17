@@ -25,8 +25,8 @@ router.get('/', (req, res) => {
     jwt.verify(req.cookies.token, secretkey, (err, decode) => {
     res.json({
        user_id: decode.id,
-        username: decode.username,
-        email: decode.email
+       username: decode.username,
+       email: decode.email
     })
     })
   }
@@ -36,7 +36,7 @@ router.post('/', (req, res, next) => {
   knex('users')
     .where({
       email: req.body.email,
-      username: req.body.username
+      username: req.body.username.toLowerCase()
     })
     .select('*')
     .first()
