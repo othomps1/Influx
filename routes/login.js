@@ -23,18 +23,10 @@ router.get('/', (req, res) => {
   else if (req.cookies.token) {
     const secretkey = process.env.JWT_KEY
     jwt.verify(req.cookies.token, secretkey, (err, decode) => {
-<<<<<<< HEAD
-
-    res.json({
-      user_id: decode.id,
-      username: decode.username,
-      email: decode.email
-=======
     res.json({
        user_id: decode.id,
         username: decode.username,
         email: decode.email
->>>>>>> b30f06fee32ef78b17d3a90f6b88c3fa046df661
     })
     })
   }
@@ -44,7 +36,7 @@ router.post('/', (req, res, next) => {
   knex('users')
     .where({
       email: req.body.email,
-      username: req.body.username.toLowerCase()
+      username: req.body.username
     })
     .select('*')
     .first()
