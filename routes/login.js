@@ -20,14 +20,19 @@ router.get('/', (req, res) => {
     res.json(false)
   }
   else if (req.cookies.token) {
-    res.json(true)
+    const secretkey = process.env.JWT_KEY
+    jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+
+    res.json(decode)
+    })
   }
 })
 
 router.post('/', (req, res, next) => {
   knex('users')
     .where({
-      email: req.body.email
+      email: req.body.email,
+      username: req.body.username
     })
     .select('*')
     .first()
@@ -48,14 +53,14 @@ router.post('/', (req, res, next) => {
           })
         }
         else {
-          next({
+          res.json({
             status: 400,
             message: 'Invalid email or password.'
           })
         }
       }
       else {
-        next({
+        res.json({
           status: 400,
           message: 'Invalid email or password.'
         })

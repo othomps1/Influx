@@ -69,21 +69,18 @@ router.get('/:id', (req, res, next) => {
     .rightJoin('filters', 'user_filters.filter_id','filters.id')
     .where({'users.id':req.params.id})
     .select('users.id','users.username','users.email','filters.filter')
-    .then((users) => {
-      let filters = users.reduce((allFilters, userFilter)=>{
-        allFilters.push(userFilter['filter'])
+    .then((usersFilters) => {
+      let filters = usersFilters.reduce((allFilters, entry)=>{
+        allFilters.push(entry['filter'])
         return allFilters
       },[])
-      if(users.filters){
-        res.status(200).json({
-          id: users[0].id,
-          username: users[0].username,
-          email: users[0].email,
-          filters: filters
-        })
-      } else if(users) {
-
+      const userInfo = {
+        user_id: usersFilters[0].id,
+        username: usersFilters[0].username,
+        email: usersFilters[0].email,
+        filters: filters
       }
+      res.status(200).json(userInfo)
     })
     .catch((err) => {
       next(err)

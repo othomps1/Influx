@@ -8,8 +8,9 @@ const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
 router.post('/', (req, res, next) => {
-  let keyword = req.body.currentfilter.replace(/[\s{2,}\.\/,$#%^*()@&?:;\-+=_!~`"]+/g, "")
-  axios.get(`https://newsapi.org/v2/everything?q=${keyword}&sortBy=relevancy&apiKey=1d611d7f36184e07b0d4ba331add49db`)
+  let keyword = req.body.filter
+  // console.log(keyword)
+  axios.get(`https://newsapi.org/v2/everything?q=${keyword.replace(/[ ]+/g, " OR ")}&sortBy=relevancy&apiKey=1d611d7f36184e07b0d4ba331add49db`)
   .then(result=>{
     res.json(result.data)
   })

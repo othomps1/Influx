@@ -8,31 +8,32 @@ const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
 router.post('/', (req, res, next) => {
-  if (!req.body['filter']) { res.status(404).send('must include filter')}
+  if (!req.body.filter) { res.status(404).send('must include filter')}
+  let filterToAdd = req.body.filter.toLowerCase().replace(/[\.\/,$#%^*()@&?:;\-+=_!~`"]+/g, "").trim("")
   knex('filters')
     .select('filter','id')
     .where({
-      filter: req.body.filter.toLowerCase()
+      filter: filterToAdd
     })
     .then(data => {
       if (!data[0]) {
         knex('filters')
           .insert({
-            filter: req.body.filter.toLowerCase()
+            filter: filterToAdd
           })
           .returning('*')
-          .then(data => {
+          .then(filterData => {
+            console.log(filterData[0])
             const secretkey = process.env.JWT_KEY
             jwt.verify(req.cookies.token, secretkey, (err, decode) => {
               knex('user_filters')
               .insert({
-                filter_id: data[0].id,
+                filter_id: filterData[0].id,
                 user_id: decode.id
               })
               .returning('*')
-              .then(user_filter=>{
-                console.log(user_filter[0])
-                res.send(data[0])
+              .then(userFilter=>{
+                res.send(userFilter[0])
               })
             })
           })
@@ -46,8 +47,7 @@ router.post('/', (req, res, next) => {
           })
           .returning('*')
           .then(user_filter=>{
-            console.log(user_filter[0])
-            res.send(data[0])
+            res.send(user_filter[0])
           })
         })
       }
