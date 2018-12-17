@@ -1,3 +1,7 @@
+let userInfo = {}
+let filterArray = []
+let filterList = document.querySelector('.filterList')
+
 document.addEventListener('DOMContentLoaded', () => {
   const updateFeed = (userInfomation3) =>{
     axios({
@@ -155,9 +159,13 @@ updateFeed({
             updateFeed(userInfo)
           })
         } else {
-          alert("please login first")
+          document.getElementById('searchBar').innerHTML =window.location.href = '/login.html'
         }
       })
     }
+  })
+  document.querySelector('.logout').addEventListener('click', () => {
+    axios.delete('/login')
+    window.location.href = '/login.html'
   })
 })
