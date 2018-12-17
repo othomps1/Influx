@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault()
     let user = {}
-    user.username = form.exampleUserName1.value
     user.email = form.exampleInputEmail1.value
     user.password = form.exampleInputPassword1.value
     axios.delete('/login')
