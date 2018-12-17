@@ -12,12 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((response) => {
       list.innerHTML = ''
       for (var i = 0; i < response.data.articles.length; i++) {
+        // <button type="button" class="btn btn-secondary">Secondary</button>
         let newThread = document.createElement('li')
         let newImage = document.createElement('img')
         let newDiv = document.createElement('div')
         let newHead = document.createElement('h5')
         let newText = document.createElement('p')
-        let newLink = document.createElement('a')
+        let newButton = document.createElement('button')
         if (response.data.articles[i].title) {
           newHead.innerHTML = response.data.articles[i].title
         } else {
@@ -37,20 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
           newImage.src = response.data.articles[i].urlToImage
         }
         if (response.data.articles[i].url) {
-          newLink.href = response.data.articles[i].url
-          newLink.innerHTML = 'Link to Article'
+          newButton.type = 'button'
+          newButton.className = 'btn mb-2 btn-secondary'
+          newButton.innerHTML = 'Visit Article page'
         }
-        newThread.className = 'media my-4'
-        newHead.className = 'mt-0 mb-1'
+        newThread.className = 'media listItem my-2 rounded mx-2'
+        newHead.className = 'mt-2 mb-1'
         newDiv.className = 'media-body'
-        newImage.className = 'mr-3 rounded'
+        newImage.className = 'mx-3 my-3 rounded'
         newImage.style = 'max-height: 30%; max-width: 30%;'
         newDiv.style = 'color: white;'
         newHead.style = 'font-family: Roboto Condensed, sans-serif;'
         newText.style = 'font-family: Playfair Display, serif;'
+        newThread.style = "background-color: #1F91D3"
         newDiv.appendChild(newHead)
         newDiv.appendChild(newText)
-        newDiv.appendChild(newLink)
+        newDiv.appendChild(newButton)
         newThread.appendChild(newImage)
         newThread.appendChild(newDiv)
         list.appendChild(newThread)
