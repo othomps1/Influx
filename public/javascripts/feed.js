@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let filter = document.createElement('span')
           let filterList2 = document.querySelector('.filterList')
           filter.innerHTML = filterArray[i]
-          filter.className = `badge filter badge-secondary mr-2`
+          filter.className = `badge filter badge-secondary mr-2 mt-`
           filter.style = 'font-size: 16px;'
           filter.addEventListener('click', (event) => {
             console.log(event.target.innerHTML)
