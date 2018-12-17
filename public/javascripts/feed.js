@@ -127,7 +127,7 @@ const list = document.querySelector('.list')
 
 
 updateFeed({
-  filter: 'apple'
+  filter: 'news'
 })
 // let filter = document.querySelectorAll('.filter')
 // console.log(filter)
