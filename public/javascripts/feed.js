@@ -1,78 +1,15 @@
-let userInfo = {}
-let filterArray = []
-let filterList = document.querySelector('.filterList')
-
 document.addEventListener('DOMContentLoaded', () => {
-
-  const addFilter = (userInfomation2) =>{
-    return  axios({
-      method: 'post',
-      url: '/filters',
-      data: userInfomation2
-    })
-  }
-
-  const getUserInfo = (userInfomation) => {
-    // console.log(userInfomation)
-    return  axios({
-      method: 'get',
-      url: `/users/${userInfomation.user_id}`
-    })
-  }
-
-  const checkLoggedIn = () =>{
-    return axios({
-      method: 'get',
-      url: '/login'
-    })
-  }
-
-  const getUsername = () => {
-    return checkLoggedIn()
-    .then(response => {
-      // console.log(response.data)
-      getUserInfo(response.data)
-      .then(results => {
-        console.log('test',results.data)
-        // userInfo = {
-        //   user_id: results.data.user_id,
-        //   username: results.data.username,
-        //   email: results.data.email
-        // }
-        userInfo.user_id = results.data.user_id
-        userInfo.username = results.data.username
-        userInfo.email = results.data.email
-        userInfo.filters = results.data.filters
-        console.log(userInfo.filters)
-        filterArray = userInfo.filters
-        console.log(filterArray)
-      })
-    })
-  }
-
-  getUsername()
-    .then(resultss => {
-      if (!checkLoggedIn()) {
-        document.querySelector('.logout').innerHTML = 'Login'
-      } else {
-        console.log(userInfo)
-        document.querySelector('.logout').innerHTML = `${userInfo.username}`
-      }
-    }
-  )
-  for (var i = 0; i < filterArray.length; i++) {
-      console.log(filterArray[i])
-    }
 
 const list = document.querySelector('.list')
 
-const updateFeed = (userInfomation3) =>{
+const updateFeed = (userInfo) =>{
   axios({
     method: 'post',
     url: '/news',
-    data: userInfomation3
+    data: userInfo
   })
   .then((response) => {
+    console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -125,10 +62,31 @@ const updateFeed = (userInfomation3) =>{
 }
 
 updateFeed({
-  filter: 'usa'
+  filter: 'news'
 })
 
 
+const addFilter = (userInfo) =>{
+  return  axios({
+      method: 'post',
+      url: '/filters',
+      data: userInfo
+    })
+}
+
+const getUserFilters = (userInfo) =>{
+  return  axios({
+      method: 'get',
+      url: `/users/${userInfo.user_id}`
+    })
+}
+
+const checkLoggedIn = () =>{
+    return axios({
+        method: 'get',
+        url: '/login'
+    })
+}
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
@@ -137,16 +95,17 @@ updateFeed({
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       list.innerHTML = ''
+      let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
-        if(result) {
+        if(result.data) {
           addFilter(userInfo)
           .then((response) => {
             userInfo['user_id'] = response.data.user_id
-            getUserInfo(userInfo)
+            getUserFilters(userInfo)
             .then(filterInfo=>{
-              userInfo = filterInfo.data
+              console.log('getUserFilters',filterInfo.data)
             })
             updateFeed(userInfo)
           })
@@ -155,9 +114,5 @@ updateFeed({
         }
       })
     }
-  })
-  document.querySelector('.logout').addEventListener('click', () => {
-    axios.delete('/login')
-    window.location.href = '/login.html'
   })
 })

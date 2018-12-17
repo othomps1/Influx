@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     user.username = form.exampleUserName1.value
     user.email = form.exampleInputEmail1.value
     user.password = form.exampleInputPassword1.value
+    console.log(user)
     axios.delete('/login')
     axios.post('/login', user)
     .then(result => {

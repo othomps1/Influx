@@ -1,10 +1,11 @@
 
-
 const express = require('express')
 const knex = require('../knex.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
+
+let userInfo = {}
 
 const jwtPayload = (user)=>{
   const payload = {
@@ -22,11 +23,18 @@ router.get('/', (req, res) => {
   else if (req.cookies.token) {
     const secretkey = process.env.JWT_KEY
     jwt.verify(req.cookies.token, secretkey, (err, decode) => {
+<<<<<<< HEAD
 
     res.json({
       user_id: decode.id,
       username: decode.username,
       email: decode.email
+=======
+    res.json({
+       user_id: decode.id,
+        username: decode.username,
+        email: decode.email
+>>>>>>> b30f06fee32ef78b17d3a90f6b88c3fa046df661
     })
     })
   }
