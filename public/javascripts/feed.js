@@ -159,7 +159,7 @@ updateFeed({
             updateFeed(userInfo)
           })
         } else {
-          document.getElementById('searchBar').innerHTML =window.location.href = '/login.html'
+          document.getElementById('searchBar').innerHTML = window.location.href = '/login.html'
         }
       })
     }
