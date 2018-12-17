@@ -86,33 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => {
       getUserInfo(response.data)
       .then(results => {
-        console.log('test',results.data)
         userInfo.user_id = results.data.user_id
         userInfo.username = results.data.username
         userInfo.email = results.data.email
         userInfo.filters = results.data.filters
         filterArray = userInfo.filters
-        console.log(filterArray)
         if (!checkLoggedIn()) {
-          console.log(userInfo)
           document.querySelector('.username1').innerHTML = 'Login'
         } else {
-          console.log(userInfo)
           document.querySelector('.username1').innerHTML = `${userInfo.username}`
         }
-        for (var i = 0; i < filterArray.length; i++) {
-          let filter = document.createElement('span')
-          let filterList2 = document.querySelector('.filterList')
-          filter.innerHTML = filterArray[i]
-          filter.className = `badge filter badge-secondary mr-2 mt-2`
-          filter.style = 'font-size: 16px;'
-          filter.addEventListener('click', (event) => {
-            console.log(event.target.innerHTML)
-            updateFeed({
-              filter: event.target.innerHTML
+        if (filterArray) {
+          for (var i = 0; i < filterArray.length; i++) {
+            let filter = document.createElement('span')
+            let filterList2 = document.querySelector('.filterList')
+            filter.innerHTML = filterArray[i]
+            filter.className = `badge filter badge-secondary mr-2 mt-2`
+            filter.style = 'font-size: 16px;'
+            filter.addEventListener('click', (event) => {
+              updateFeed({
+                filter: event.target.innerHTML
+              })
             })
-          })
-          filterList2.appendChild(filter)
+            filterList2.appendChild(filter)
+          }
+        } else {
+          // let filterList4 = document.querySelector('.filterList')
+          // let filter = document.createElement('span')
+          // filter.innerHTML = 'No Filters'
+          // filterList4.appendChild(filter)
         }
       })
     })
