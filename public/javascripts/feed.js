@@ -9,7 +9,7 @@ const updateFeed = (userInfo) =>{
     data: userInfo
   })
   .then((response) => {
-    // console.log("updateFeed response.data", response.data)
+    console.log("updateFeed response.data", response.data)
     for (var i = 0; i < response.data.articles.length; i++) {
       let newThread = document.createElement('li')
       let newImage = document.createElement('img')
@@ -62,7 +62,7 @@ const updateFeed = (userInfo) =>{
 }
 
 updateFeed({
-  filter: 'usa'
+  filter: 'news'
 })
 
 
@@ -74,7 +74,7 @@ const addFilter = (userInfo) =>{
     })
 }
 
-const getUserInfo = (userInfo) =>{
+const getUserFilters = (userInfo) =>{
   return  axios({
       method: 'get',
       url: `/users/${userInfo.user_id}`
@@ -99,13 +99,13 @@ const checkLoggedIn = () =>{
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
-        if(result) {
+        if(result.data) {
           addFilter(userInfo)
           .then((response) => {
             userInfo['user_id'] = response.data.user_id
-            getUserInfo(userInfo)
+            getUserFilters(userInfo)
             .then(filterInfo=>{
-              console.log('getUsersInfo',filterInfo.data)
+              console.log('getUserFilters',filterInfo.data)
             })
             updateFeed(userInfo)
           })
