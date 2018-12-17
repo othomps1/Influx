@@ -25,8 +25,8 @@ router.get('/', (req, res) => {
     jwt.verify(req.cookies.token, secretkey, (err, decode) => {
     res.json({
        user_id: decode.id,
-        username: decode.username,
-        email: decode.email
+       username: decode.username,
+       email: decode.email
     })
     })
   }

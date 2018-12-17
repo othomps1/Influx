@@ -64,23 +64,37 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-  return knex('users')
+  knex('users')
     .join('user_filters', 'users.id', 'user_filters.user_id')
     .rightJoin('filters', 'user_filters.filter_id','filters.id')
     .where({'users.id':req.params.id})
     .select('users.id','users.username','users.email','filters.filter')
     .then((usersFilters) => {
-      let filters = usersFilters.reduce((allFilters, entry)=>{
-        allFilters.push(entry['filter'])
-        return allFilters
-      },[])
-      const userInfo = {
-        user_id: usersFilters[0].id,
-        username: usersFilters[0].username,
-        email: usersFilters[0].email,
-        filters: filters
+      if(usersFilters[0]){
+        let filters = usersFilters.reduce((allFilters, entry)=>{
+          allFilters.push(entry['filter'])
+          return allFilters
+        },[])
+        const userInfo = {
+          user_id: req.params.id,
+          username: usersFilters[0].username,
+          email: usersFilters[0].email,
+          filters: filters
+        }
+        res.status(200).json(userInfo)
+      } else {
+        knex('users')
+          .select('users.id','users.username','users.email')
+          .where({'users.id':req.params.id})
+          .then((usersInformation) => {
+              const userInfo = {
+                user_id: req.params.id,
+                username: usersInformation[0].username,
+                email: usersInformation[0].email
+              }
+              res.status(200).json(userInfo)
+            })
       }
-      res.status(200).json(userInfo)
     })
     .catch((err) => {
       next(err)
