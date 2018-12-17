@@ -70,12 +70,13 @@ router.get('/:id', (req, res, next) => {
     .where({'users.id':req.params.id})
     .select('users.id','users.username','users.email','filters.filter')
     .then((usersFilters) => {
+      console.log(usersFilters)
       let filters = usersFilters.reduce((allFilters, entry)=>{
         allFilters.push(entry['filter'])
         return allFilters
       },[])
       const userInfo = {
-        user_id: usersFilters[0].id,
+        user_id: req.params.id,
         username: usersFilters[0].username,
         email: usersFilters[0].email,
         filters: filters
