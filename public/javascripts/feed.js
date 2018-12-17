@@ -1,6 +1,9 @@
+let userInfo = {}
+let filterArray = []
+let filterList = document.querySelector('.filterList')
+
 document.addEventListener('DOMContentLoaded', () => {
 
-  let userInfo = {}
   const addFilter = (userInfomation2) =>{
     return  axios({
       method: 'post',
@@ -9,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const getUserInfo = (userInfomation) =>{
+  const getUserInfo = (userInfomation) => {
+    // console.log(userInfomation)
     return  axios({
       method: 'get',
       url: `/users/${userInfomation.user_id}`
@@ -23,15 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const getUsername = getUserInfo(checkLoggedIn().user_id)
-  console.log(getUsername)
-
-  getUserInfo()
-  if (!checkLoggedIn()) {
-    document.querySelector('.logout').innerHTML = 'Login'
-  } else {
-    document.querySelector('.logout').innerHTML = userInfo.username
+  const getUsername = () => {
+    return checkLoggedIn()
+    .then(response => {
+      // console.log(response.data)
+      getUserInfo(response.data)
+      .then(results => {
+        console.log('test',results.data)
+        // userInfo = {
+        //   user_id: results.data.user_id,
+        //   username: results.data.username,
+        //   email: results.data.email
+        // }
+        userInfo.user_id = results.data.user_id
+        userInfo.username = results.data.username
+        userInfo.email = results.data.email
+        userInfo.filters = results.data.filters
+        console.log(userInfo.filters)
+        filterArray = userInfo.filters
+        console.log(filterArray)
+      })
+    })
   }
+
+  getUsername()
+    .then(resultss => {
+      if (!checkLoggedIn()) {
+        document.querySelector('.logout').innerHTML = 'Login'
+      } else {
+        console.log(userInfo)
+        document.querySelector('.logout').innerHTML = `${userInfo.username}`
+      }
+    }
+  )
+  for (var i = 0; i < filterArray.length; i++) {
+      console.log(filterArray[i])
+    }
 
 const list = document.querySelector('.list')
 
@@ -106,7 +137,6 @@ updateFeed({
       userSearch.placeholder = 'Please enter a Filter'
     } else {
       list.innerHTML = ''
-      let userInfo = {}
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
