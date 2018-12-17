@@ -104,10 +104,30 @@ const updateFeed = (userInfomation3) =>{
 }
 
 updateFeed({
-  filter: 'usa'
+  filter: 'news'
 })
 
+const addFilter = (userInfo) =>{
+  return  axios({
+      method: 'post',
+      url: '/filters',
+      data: userInfo
+    })
+}
 
+const getUserFilters = (userInfo) =>{
+  return  axios({
+      method: 'get',
+      url: `/users/${userInfo.user_id}`
+    })
+}
+
+const checkLoggedIn = () =>{
+    return axios({
+        method: 'get',
+        url: '/login'
+    })
+}
 
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
@@ -119,12 +139,13 @@ updateFeed({
       userInfo.filter = userSearch.value
       checkLoggedIn()
       .then(result=>{
-        if(result) {
+        if(result.data) {
           addFilter(userInfo)
           .then((response) => {
             userInfo['user_id'] = response.data.user_id
-            getUserInfo(userInfo)
+            getUserFilters(userInfo)
             .then(filterInfo=>{
+              console.log('getUserFilters',filterInfo.data)
               userInfo = filterInfo.data
             })
             updateFeed(userInfo)
