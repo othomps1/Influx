@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="/stylesheets/style.css">
@@ -11,7 +10,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>News Feed</title>
 </head>
-
 <body>
   <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #1972A4;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,9 +20,9 @@
         <a class="navbar-brand">
           <img src="images/pinterest_profile_image.png" class="rounded-circle" width="60" height="60" alt="">
         </a>
+        <a class="nav-item username1 nav-link mx-2" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Username</a>
         <a class="nav-item nav-link mx-2" href="/settings.html" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Settings</a>
         <a class="nav-item logout nav-link mx-2" href="#" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Logout</a>
-        <a class="nav-item username1 nav-link mx-2" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Username</a>
       </div>
     </div>
   </nav>
@@ -32,8 +30,8 @@
     <div class="row">
       <div class="col-6 offset-3 ">
         <form class="form-inline">
-          <input id="searchBar" class="form-control searchBar mr-sm-2" type="search" placeholder="Filter" value="" aria-label="Search">
-          <input class="btn button my-2 my-sm-0" type="submit" value="Filter"></input>
+          <input id="searchBar" class="form-control searchBar mr-sm-2" type="search" placeholder="Search Influx" value="" aria-label="Search">
+          <input class="btn button my-2 my-sm-0" type="submit" value="Set Tag"></input>
         </form>
         <!-- Dropdown Menu -->
         <div id="sortByDropdown" class="btn-group mt-3">
@@ -89,7 +87,6 @@
     <div class="row">
       <div class="col-6 offset-3">
         <div class="filterList">
-
         </div>
       </div>
     </div>
@@ -107,5 +104,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-
 </html>
