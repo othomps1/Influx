@@ -148,9 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
               .then(filterInfo =>{
                 removeUserFilter(userInfo.user_id, filterInfo.data.id)
                   .then(filterInfo =>{
-                    getUsername()
                     const resetFilters = document.querySelector('.filterList')
                     resetFilters.innerHTML = ''
+                    getUsername()
                     updateFeed(userInfo)
                 })
               })

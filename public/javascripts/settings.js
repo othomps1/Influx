@@ -1,3 +1,10 @@
+const checkLoggedIn = () =>{
+  return axios({
+    method: 'get',
+    url: '/login'
+  })
+}
+
 function confirmDelete (user) {
   return axios.delete(`users/${user.id}`)
 }
