@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
           newButton.type = 'submit'
           newButton.className = 'btn mb-2 btn-secondary'
           newButton.value = 'Visit Article page'
-          console.log(response.data.articles[i].url)
           newForm.action = response.data.articles[i].url
         }
         newThread.className = 'media listItem my-2 rounded mx-2'
