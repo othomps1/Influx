@@ -26,18 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
           window.location.href = 'login.html'
         }
       })
-  }) //End of DOM Content
+  })
+}) //End of DOM Content
 
-  function changePassword (id, newPassword) {
-    console.log(id)
-    return axios({
-      method: 'patch',
-      url: `/users/${id}`,
-      data: {
-        password: newPassword
-      }
-    })
-  }
+function changePassword (id, newPassword) {
+  console.log(id)
+  return axios({
+    method: 'patch',
+    url: `/users/${id}`,
+    data: {
+      password: newPassword
+    }
+  })
+}
 
   document.addEventListener('DOMContentLoaded', function () {
     const oldPassword = document.getElementById('exampleInputPassword1')
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('test')
             changePassword(result.data.user_id, newPassword)
             window.location.href = 'settings.html'
-            axios.patch('/settings')
+            axios.patch('/users')
           } else {
             window.location.href = 'login.html'
           }
