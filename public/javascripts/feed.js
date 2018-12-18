@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
           newButton.type = 'submit'
           newButton.className = 'btn mb-2 btn-secondary'
           newButton.value = 'Visit Article page'
-          console.log(response.data.articles[i].url)
           newForm.action = response.data.articles[i].url
         }
         newThread.className = 'media listItem my-2 rounded mx-2'
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     .catch((err) => {
-      console.log(err)
+      return console.log(err)
     })
   }
 
@@ -75,6 +74,23 @@ document.addEventListener('DOMContentLoaded', () => {
       data: userInfomation2
     })
   }
+
+  const removeUserFilter = (userID, filterId) =>{
+    return  axios({
+      method: 'delete',
+      url: `/userFilters/${userID}`,
+      data: {filterId: filterId}
+    })
+  }
+
+  const removeFilter = (filter) =>{
+    return axios({
+      method: 'post',
+      url: '/filters/getID',
+      data: {filter: `${filter}`}
+    })
+  }
+
 
   const getUserInfo = (userInfomation) => {
     // console.log(userInfomation)
@@ -127,7 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
               updateFeed(userInfo)
             })
             image.addEventListener('click', (event) => {
-              console.log(event.path[1].firstElementChild.innerHTML)
+              let filterToRemove = event.path[1].firstElementChild.innerHTML
+              removeFilter(filterToRemove)
+              .then(filterInfo =>{
+                removeUserFilter(userInfo.user_id, filterInfo.data.id)
+                  .then(filterInfo =>{
+                    getUsername()
+                    const resetFilters = document.querySelector('.filterList')
+                    resetFilters.innerHTML = ''
+                    updateFeed(userInfo)
+                })
+              })
+
             })
             span.appendChild(text)
             span.appendChild(image)
@@ -172,7 +199,7 @@ updateFeed({
             updateFeed(userInfo)
           })
         } else {
-          alert("please login first")
+          document.getElementById('searchBar').innerHTML = window.location.href = '/login.html'
         }
       })
     }

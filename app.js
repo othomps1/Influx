@@ -10,6 +10,7 @@ var filtersRouter = require('./routes/filters');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var newsRouter = require('./routes/news');
+var userFiltersRouter = require('./routes/userFilters');
 // var users_filtersRouter = require('./routes/users_filters')
 
 var app = express();
@@ -24,5 +25,6 @@ app.use('/filters', filtersRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/news', newsRouter);
+app.use('/userFilters', userFiltersRouter);
 
 module.exports = app;

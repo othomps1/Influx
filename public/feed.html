@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="/stylesheets/style.css">
@@ -11,7 +10,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>News Feed</title>
 </head>
-
 <body>
   <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #1972A4;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,85 +26,75 @@
       </div>
     </div>
   </nav>
-  <div class="container">
+  <div class="container my-3">
     <div class="row">
-      <div class="col mt-3 pb-2" style="-webkit-border-radius: 10px; border-radius: 10px; color: #1972A4;">
-        <p class="text-center mb-1" style="color: #ffffff">Saved Filters</p>
-        <div class="filterList mx-auto">
-
+      <div class="col-6 offset-3 ">
+        <form class="form-inline">
+          <input id="searchBar" class="form-control searchBar mr-sm-2" type="search" placeholder="Filter" value="" aria-label="Search">
+          <input class="btn button my-2 my-sm-0" type="submit" value="Filter"></input>
+        </form>
+        <!-- Dropdown Menu -->
+        <div id="sortByDropdown" class="btn-group mt-3">
+          <button id="sortByButton" style="background-color: #1972A4" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Relevancy</a>
+            <a class="dropdown-item" href="#">Popularity</a>
+            <a class="dropdown-item" href="#">Date Published</a>
+          </div>
         </div>
+        <div id="sourceDropdown" class="btn-group mt-3">
+          <button id="sourceButton" style="background-color: #1972A4" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sources</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">All Sources</a>
+            <a class="dropdown-item" href="#">ABC News</a>
+            <a class="dropdown-item" href="#">Al Jazeera </a>
+            <a class="dropdown-item" href="#">Associated Press</a>
+            <a class="dropdown-item" href="#">BBC </a>
+            <a class="dropdown-item" href="#">Bloomberg</a>
+            <a class="dropdown-item" href="#">CNN </a>
+            <a class="dropdown-item" href="#">The Economist</a>
+            <a class="dropdown-item" href="#">Fox News</a>
+            <a class="dropdown-item" href="#">The Gaurdian </a>
+            <a class="dropdown-item" href="#">Huffington Post</a>
+            <a class="dropdown-item" href="#">New York Times</a>
+            <a class="dropdown-item" href="#">Reuters </a>
+            <a class="dropdown-item" href="#">Wallstreet Journal</a>
+          </div>
+        </div>
+        <div id="languageDropdown" class="btn-group mt-3">
+          <button id="languageButton" style="background-color: #1972A4" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">All Languages</a>
+            <a class="dropdown-item" href="#">Arabic (العربية)</a>
+            <a class="dropdown-item" href="#">German (Deutsch)</a>
+            <a class="dropdown-item" href="#">English </a>
+            <a class="dropdown-item" href="#">Spanish </a>
+            <a class="dropdown-item" href="#">French (Français)</a>
+            <a class="dropdown-item" href="#">Hebrew (עברית)</a>
+            <a class="dropdown-item" href="#">Italian (Italiano)</a>
+            <a class="dropdown-item" href="#">Dutch (Nederlands)</a>
+            <a class="dropdown-item" href="#">Norweigan (Norsk)</a>
+            <a class="dropdown-item" href="#">Portuguese (Português)</a>
+            <a class="dropdown-item" href="#">Russian (русский)</a>
+            <a class="dropdown-item" href="#">Chinese (中文)</a>
+          </div>
+        </div>
+        <ul id="filterDiv"></ul>
       </div>
     </div>
   </div>
-  <div class="container my-3">
+  <div class="container">
     <div class="row">
-      <div class="col">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <form class="form-inline">
-                <input id="searchBar" class="form-control searchBar mr-sm-2" type="search" placeholder="Filter" value="" aria-label="Search">
-                <input class="btn button my-2 my-sm-0" type="submit" value="Filter"></input>
-              </form>
-              <div id="sortByDropdown" class="btn-group mt-3">
-                <button id="sortByButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Relevancy</a>
-                  <a class="dropdown-item" href="#">Popularity</a>
-                  <a class="dropdown-item" href="#">Date Published</a>
-                </div>
-              </div>
-              <div id="sourceDropdown" class="btn-group mt-3">
-                <button id="sourceButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sources</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">All Sources</a>
-                  <a class="dropdown-item" href="#">ABC News</a>
-                  <a class="dropdown-item" href="#">Al Jazeera </a>
-                  <a class="dropdown-item" href="#">Associated Press</a>
-                  <a class="dropdown-item" href="#">BBC </a>
-                  <a class="dropdown-item" href="#">Bloomberg</a>
-                  <a class="dropdown-item" href="#">CNN </a>
-                  <a class="dropdown-item" href="#">The Economist</a>
-                  <a class="dropdown-item" href="#">Fox News</a>
-                  <a class="dropdown-item" href="#">The Gaurdian </a>
-                  <a class="dropdown-item" href="#">Huffington Post</a>
-                  <a class="dropdown-item" href="#">New York Times</a>
-                  <a class="dropdown-item" href="#">Reuters </a>
-                  <a class="dropdown-item" href="#">Wallstreet Journal</a>
-                </div>
-              </div>
-              <div id="languageDropdown" class="btn-group mt-3">
-                <button id="languageButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">All Languages</a>
-                  <a class="dropdown-item" href="#">Arabic (العربية)</a>
-                  <a class="dropdown-item" href="#">German (Deutsch)</a>
-                  <a class="dropdown-item" href="#">English </a>
-                  <a class="dropdown-item" href="#">Spanish </a>
-                  <a class="dropdown-item" href="#">French (Français)</a>
-                  <a class="dropdown-item" href="#">Hebrew (עברית)</a>
-                  <a class="dropdown-item" href="#">Italian (Italiano)</a>
-                  <a class="dropdown-item" href="#">Dutch (Nederlands)</a>
-                  <a class="dropdown-item" href="#">Norweigan (Norsk)</a>
-                  <a class="dropdown-item" href="#">Portuguese (Português)</a>
-                  <a class="dropdown-item" href="#">Russian (русский)</a>
-                  <a class="dropdown-item" href="#">Chinese (中文)</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-10 offset-1">
-            </div>
-          </div>
+      <div class="col-6 offset-3">
+        <div class="filterList">
         </div>
-        <!-- Dropdown Menu -->
-        <ul id="filterDiv"></ul>
       </div>
     </div>
   </div>
   <div class="container col-md col-xl-10 offset-md offset-xl-1">
     <div class="row">
       <div class="col">
-        <div class="container my-4 py-2" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4;">
+        <div class="container my-5 py-2" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4;">
           <ul class="list-unstyled list my-2"></ul>
         </div>
       </div>
@@ -116,5 +104,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-
 </html>

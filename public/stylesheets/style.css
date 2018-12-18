@@ -3,16 +3,14 @@ body {
   background-image: url("../images/influx_Background.jpg");
 }
 
-a {
-  color: #ffffff;
+a.clickHere {
+  color: #ffffff !important;
 }
 
 #image {
   max-width: 300px;
   max-height: 300px;
 }
-
-
 
 .modal-dialog {
   position: absolute;
