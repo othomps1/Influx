@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('DOMContentLoaded', function () {
     const oldPassword = document.getElementById('exampleInputPassword1')
     const newPassword = document.getElementById('exampleInputPassword2')
-    const confirmNewPassword = document.getElementById('exampleInputPassword3')
+    const confirmNewPassword = document.querySelector('#confirmNewPassword')
 
     confirmNewPassword.addEventListener('click', () => {
       checkLoggedIn()
@@ -57,3 +57,4 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         })
     })
+  })
