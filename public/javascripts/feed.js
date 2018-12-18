@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let newDiv = document.createElement('div')
         let newHead = document.createElement('h5')
         let newText = document.createElement('p')
-        let newButton = document.createElement('button')
+        let newButton = document.createElement('input')
+        let newForm = document.createElement('form')
         if (response.data.articles[i].title) {
           newHead.innerHTML = response.data.articles[i].title
         } else {
@@ -38,9 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
           newImage.src = response.data.articles[i].urlToImage
         }
         if (response.data.articles[i].url) {
-          newButton.type = 'button'
+          newButton.type = 'submit'
           newButton.className = 'btn mb-2 btn-secondary'
-          newButton.innerHTML = 'Visit Article page'
+          newButton.value = 'Visit Article page'
+          console.log(response.data.articles[i].url)
+          newForm.action = response.data.articles[i].url
         }
         newThread.className = 'media listItem my-2 rounded mx-2'
         newHead.className = 'my-2'
@@ -53,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         newThread.style = "background-color: #1F91D3"
         newDiv.appendChild(newHead)
         newDiv.appendChild(newText)
-        newDiv.appendChild(newButton)
+        newForm.appendChild(newButton)
+        newDiv.appendChild(newForm)
         newThread.appendChild(newImage)
         newThread.appendChild(newDiv)
         list.appendChild(newThread)
