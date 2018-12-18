@@ -41,14 +41,14 @@ function changePassword (id, newPassword) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const oldPassword = document.getElementById('exampleInputPassword1')
-  const newPassword = document.getElementById('exampleInputPassword2')
+  const oldPassword = document.getElementById('exampleInputPassword1').value
+  const newPassword = document.getElementById('exampleInputPassword2').value
   const confirmNewPassword = document.querySelector('#confirmNewPassword')
 
   confirmNewPassword.addEventListener('click', () => {
     checkLoggedIn()
       .then(result => {
-        if (result) {
+        if (result.data) {
           console.log('test')
           changePassword(result.data.user_id, newPassword)
           .then(()=>{window.location.href = 'settings.html'})
