@@ -84,9 +84,34 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.post('/getID', (req, res, next) => {
+  knex('filters')
+    .select('filter','id')
+    .where('filter', req.body.filter)
+    .then(data => {
+      res.send(data[0])
+    })
+})
+
 router.delete('/:id', (req, res, next) => {
   return knex('filters')
     .where('id', req.params.id)
+    .del('*')
+    .then((filters) => {
+      if (!filters.length) {
+        return next()
+      }
+      const filter = filters[0]
+      res.send(filter)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
+router.delete('/:id', (req, res, next) => {
+  return knex('filters')
+    .where('filter', req.params.filterName)
     .del('*')
     .then((filters) => {
       if (!filters.length) {
