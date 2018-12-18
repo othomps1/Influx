@@ -102,10 +102,11 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.patch('/:id', (req, res, next) => {
+  
   knex('users')
-    .where({'users.id':req.params.id})
+    .where('users.id', req.params.id)
     .update({
-      password: hashed_password: bcrypt.hashSync(req.body.password, 1)
+      hashed_password: bcrypt.hashSync(req.body.password, 1)
     })
     .then((usersInformation) => {
         const userInfo = {
