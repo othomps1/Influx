@@ -172,7 +172,7 @@ updateFeed({
             updateFeed(userInfo)
           })
         } else {
-          alert("please login first")
+          document.getElementById('searchBar').innerHTML = window.location.href = '/login.html'
         }
       })
     }
