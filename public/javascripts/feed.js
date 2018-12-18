@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((response) => {
       list.innerHTML = ''
       for (var i = 0; i < response.data.articles.length; i++) {
-        // <button type="button" class="btn btn-secondary">Secondary</button>
         let newThread = document.createElement('li')
         let newImage = document.createElement('img')
         let newDiv = document.createElement('div')
@@ -109,23 +108,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (filterArray) {
           for (var i = 0; i < filterArray.length; i++) {
-            let filter = document.createElement('span')
+            let badge = document.createElement('span')
+            let button = document.createElement('span')
+            let image = document.createElement('img')
+            let text = document.createElement('p')
+            let span = document.createElement('span')
             let filterList2 = document.querySelector('.filterList')
-            filter.innerHTML = filterArray[i]
-            filter.className = `badge filter badge-secondary mr-2 mt-2`
-            filter.style = 'font-size: 16px;'
-            filter.addEventListener('click', (event) => {
-              updateFeed({
-                filter: event.target.innerHTML
-              })
+            text.innerHTML = filterArray[i]
+            text.className = 'mb-0 mr-1'
+            image.src = 'https://image.flaticon.com/icons/png/128/458/458594.png'
+            image.style = 'height: 20px; width: 20px;'
+            image.className = 'float-left'
+            span.className = 'form-inline'
+            badge.className = `badge float-left filter badge-secondary mt-2 mr-2`
+            badge.style = 'font-size: 16px;'
+            text.addEventListener('click', (event) => {
+              userInfo.filter = event.target.innerHTML
+              updateFeed(userInfo)
             })
-            filterList2.appendChild(filter)
+            image.addEventListener('click', (event) => {
+              console.log(event.path[1].firstElementChild.innerHTML)
+            })
+            span.appendChild(text)
+            span.appendChild(image)
+            badge.appendChild(span)
+            filterList2.appendChild(badge)
+            filterList2.appendChild(button)
           }
         } else {
-          // let filterList4 = document.querySelector('.filterList')
-          // let filter = document.createElement('span')
-          // filter.innerHTML = 'No Filters'
-          // filterList4.appendChild(filter)
+          let filterList4 = document.querySelector('.filterList')
+          let filter = document.createElement('span')
+          filter.innerHTML = 'No Filters'
+          filterList4.appendChild(filter)
         }
       })
     })
