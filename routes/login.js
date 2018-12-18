@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
        email: decode.email
     })
     })
-  }
+  } 
 })
 
 router.post('/', (req, res, next) => {
