@@ -135,11 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             filterList2.appendChild(badge)
             filterList2.appendChild(button)
           }
-        } else {
-          let filterList4 = document.querySelector('.filterList')
-          let filter = document.createElement('span')
-          filter.innerHTML = 'No Filters'
-          filterList4.appendChild(filter)
         }
       })
     })
@@ -152,11 +147,8 @@ const list = document.querySelector('.list')
 updateFeed({
   filter: 'news'
 })
-// let filter = document.querySelectorAll('.filter')
-// console.log(filter)
-//   filter.addEventListener('click', () => {
-//     console.log(event.target)
-//   })
+
+
   document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
     const userSearch = document.querySelector('.searchBar')
@@ -172,10 +164,10 @@ updateFeed({
         if(result.data) {
           addFilter(userInfo)
           .then((response) => {
-            userInfo['user_id'] = response.data.user_id
+            // userInfo['user_id'] = response.data.user_id
             getUsername(userInfo)
             .then(filterInfo=>{
-              userInfo = filterInfo.data
+              // userInfo = filterInfo.data
             })
             updateFeed(userInfo)
           })
@@ -185,6 +177,109 @@ updateFeed({
       })
     }
   })
+
+  document.querySelector('#sortByDropdown').addEventListener('click', (event) => {
+    switch(event.target.innerText) {
+      case 'Relevancy':
+        userInfo.sortBy = "relevancy"
+        break;
+      case 'Popularity':
+          userInfo.sortBy = "popularity"
+        break;
+      case 'Date Published':
+        userInfo.sortBy = "publishedAt"
+    }
+    document.querySelector('#sortByButton').innerText = event.target.innerText
+  })
+
+  document.querySelector('#languageDropdown').addEventListener('click', (event) => {
+    let currentLang = event.target.innerText.split(" ")[0]
+    switch(currentLang) {
+      case 'All':
+        delete userInfo.language
+        break;
+      case 'Arabic':
+        userInfo.language = "ar"
+        break;
+      case 'German':
+        userInfo.language = "de"
+        break;
+      case 'English':
+        userInfo.language = "en"
+      case 'Spanish':
+        userInfo.language = "es"
+      case 'French':
+        userInfo.language = "fr"
+        break;
+      case 'Hebrew':
+        userInfo.language = "he"
+        break;
+      case 'Italian':
+        userInfo.language = "it"
+      case 'Dutch':
+        userInfo.language = "nl"
+        break;
+      case 'Norweigan':
+        userInfo.language = "no"
+        break;
+      case 'Portuguese':
+        userInfo.language = "pt"
+      case 'Russian':
+        userInfo.language = "ru"
+        break;
+      case 'Chinese':
+        userInfo.language = "zh"
+        break;
+    }
+    document.querySelector('#languageButton').innerText = currentLang
+  })
+
+  document.querySelector('#sourceDropdown').addEventListener('click', (event) => {
+    let currentSource = event.target.innerText
+    switch(currentSource) {
+      case 'All Sources':
+        delete userInfo.source
+        break;
+      case 'ABC':
+        userInfo.source = "abc-news"
+        break;
+      case 'Al Jazeera':
+        userInfo.source = "al-jazeera-english"
+        break;
+      case 'Associated Press':
+        userInfo.source = "associated-press"
+        break;
+      case 'BBC':
+        userInfo.source = "bbc-news"
+      case 'Bloomberg':
+        userInfo.source = "bloomberg"
+      case 'CNN':
+        userInfo.source = "cnn"
+        break;
+      case 'The Economist':
+        userInfo.source = "the-economist"
+        break;
+      case 'Fox News':
+        userInfo.source = "fox-news"
+        break;
+      case 'The Gaurdian':
+        userInfo.source = "the-gaurdian-uk"
+        break;
+      case 'Huffington Post':
+        userInfo.source = "the-huffington-post"
+        break;
+      case 'New York Times':
+        userInfo.source = "the-new-york-times"
+        break;
+      case 'Reuters':
+        userInfo.source = "reuters"
+      case 'Wallstreet Journal':
+        userInfo.source = "the-wall-street-journal"
+        break;
+    }
+    document.querySelector('#sourceButton').innerText = currentSource
+  })
+
   document.querySelector('.logout').addEventListener('click', () => {
     axios.delete('/login')
     window.location.href = '/login.html'
