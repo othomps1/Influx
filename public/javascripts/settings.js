@@ -6,3 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     user.email = form.exampleInputEmail1.value
     user.password = form.exampleInputPassword1.value
     axios.delete('/users/:id')
+  }
+}
+})
