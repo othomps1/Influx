@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   button.addEventListener('submit', (event) => {
     event.preventDefault()
     let user = {}
-    user.email = button.exampleInputEmail1.value
-    user.password = button.exampleInputPassword1.value
+    user.email = button.email.value
+    user.password = button.password.value
     axios.delete('/users/:id')
   })
 })
