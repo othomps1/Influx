@@ -3,7 +3,7 @@ body {
   background-image: url("../images/influx_Background.jpg");
 }
 
-a {
+a.clickHere {
   color: #ffffff !important;
 }
 
