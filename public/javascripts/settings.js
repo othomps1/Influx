@@ -1,21 +1,8 @@
-function confirmDelete (user) {
-  return axios.delete(`users/${user.id}`)
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  const userDelete = document.getElementById('deleteUser')
-
-  userDelete.addEventListener('', event => {
-    let password = document.getElementById('password').value
-    let email = document.getElementById('email').value
-
+document.addEventListener('DOMContentLoaded', () => {
+  const button = document.querySelector('button')
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
     let user = {}
-    user.email = email
-    user.password = password
-    confirmDelete(user)
-      .then(data => {
-        let id = data.id
-        userDelete(id)
-      })
-  })
-})// End of DOM Content
+    user.email = form.exampleInputEmail1.value
+    user.password = form.exampleInputPassword1.value
+    axios.delete('/users/:id')
