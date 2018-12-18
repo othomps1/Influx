@@ -101,6 +101,23 @@ router.get('/:id', (req, res, next) => {
     })
 })
 
+router.patch('/:id', (req, res, next) => {
+  knex('users')
+    .where({'users.id':req.params.id})
+    .update({
+      password: hashed_password: bcrypt.hashSync(req.body.password, 1)
+    })
+    .then((usersInformation) => {
+        const userInfo = {
+          user_id: req.params.id,
+          username: usersInformation[0].username,
+          email: usersInformation[0].email
+        }
+        res.status(200).json(userInfo)
+      })
+})
+
+
 router.delete('/:id', (req, res, next) => {
   return knex('users')
     .where({
