@@ -36,17 +36,18 @@
           <input class="btn button my-2 my-sm-0" type="submit" value="Filter"></input>
         </form>
         <!-- Dropdown Menu -->
-        <div class="btn-group mt-3">
-          <button type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+        <div id="sortByDropdown" class="btn-group mt-3">
+          <button id="sortByButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">Relevancy</a>
             <a class="dropdown-item" href="#">Popularity</a>
             <a class="dropdown-item" href="#">Date Published</a>
           </div>
         </div>
-        <div class="btn-group mt-3">
-          <button type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News Source</button>
+        <div id="sourceDropdown" class="btn-group mt-3">
+          <button id="sourceButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sources</button>
           <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">All Sources</a>
             <a class="dropdown-item" href="#">ABC News</a>
             <a class="dropdown-item" href="#">Al Jazeera </a>
             <a class="dropdown-item" href="#">Associated Press</a>
@@ -54,19 +55,22 @@
             <a class="dropdown-item" href="#">Bloomberg</a>
             <a class="dropdown-item" href="#">CNN </a>
             <a class="dropdown-item" href="#">The Economist</a>
+            <a class="dropdown-item" href="#">Fox News</a>
             <a class="dropdown-item" href="#">The Gaurdian </a>
-            <a class="dropdown-item" href="#">Google News</a>
+            <a class="dropdown-item" href="#">Huffington Post</a>
             <a class="dropdown-item" href="#">New York Times</a>
             <a class="dropdown-item" href="#">Reuters </a>
             <a class="dropdown-item" href="#">Wallstreet Journal</a>
           </div>
         </div>
-        <div class="btn-group mt-3">
-          <button type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
+        <div id="languageDropdown" class="btn-group mt-3">
+          <button id="languageButton" type="button" class="btn btn-primary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
           <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">All Languages</a>
             <a class="dropdown-item" href="#">Arabic (العربية)</a>
             <a class="dropdown-item" href="#">German (Deutsch)</a>
             <a class="dropdown-item" href="#">English </a>
+            <a class="dropdown-item" href="#">Spanish </a>
             <a class="dropdown-item" href="#">French (Français)</a>
             <a class="dropdown-item" href="#">Hebrew (עברית)</a>
             <a class="dropdown-item" href="#">Italian (Italiano)</a>
