@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="container mt-5">
-    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff;">
+    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff; font-family: 'Playfair Display', serif; font-size: 1.25rem">
       <p class="text-center">Welcome to Influx!</p>
       <p class="text-center">Create your account below.</p>
     </div>
@@ -27,25 +27,25 @@
       <form style="font-family: 'Playfair Display', serif;">
         <br>
         <div class="form-group">
-          <label for="exampleUserName1">Username</label>
+          <label for="exampleUserName1">Username:</label>
           <input id ="exampleUserName1" class="form-control" type="text" placeholder="Enter Username" required>
         </div>
         <br>
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
+          <label for="exampleInputEmail1">Email address:</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"required>
           <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
         </div>
         <br>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+          <label for="exampleInputPassword1">Password:</label>
           <input type="password" class="form-control" id="exampleInputPassword1" minlength="8" placeholder="Password" onkeyup='check();' required>
           <ul class="my-1">
             <li><p id="message1">Password must be longer than 8 characters</p></li>
           </ul>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword2">Confirm Password</label>
+          <label for="exampleInputPassword2">Confirm Password:</label>
           <input type="password" class="form-control" id="exampleInputPassword2" minlength="8" placeholder="Confirm Password" onkeyup='check();' required>
           <ul class="my-1">
             <li><p id="message2">Passwords must match</p></li>
@@ -58,8 +58,10 @@
     </div>
   </div>
   <div class="container mb-5">
-    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff;">
-      Already have an Account? <a href="login.html">Click Here</a>
+    <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff; text-align:center; font-family: 'Playfair Display', serif;">
+      Already have an Account?
+      <br>
+      <a href="login.html" style="color:white;">Click Here</a>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
