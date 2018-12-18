@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (result) {
           console.log('test')
           changePassword(result.data.user_id, newPassword)
-          window.location.href = 'settings.html'
-          axios.patch('/settings')
+          .then(()=>{window.location.href = 'settings.html'})
         } else {
           window.location.href = 'login.html'
         }
