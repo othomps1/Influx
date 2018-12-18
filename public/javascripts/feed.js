@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let newDiv = document.createElement('div')
         let newHead = document.createElement('h5')
         let newText = document.createElement('p')
-        let newLink = document.createElement('a')
+        let newButton = document.createElement('input')
+        let newForm = document.createElement('form')
         if (response.data.articles[i].title) {
           newHead.innerHTML = response.data.articles[i].title
         } else {
@@ -37,20 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
           newImage.src = response.data.articles[i].urlToImage
         }
         if (response.data.articles[i].url) {
-          newLink.href = response.data.articles[i].url
-          newLink.innerHTML = 'Link to Article'
+          newButton.type = 'submit'
+          newButton.className = 'btn mb-2 btn-secondary'
+          newButton.value = 'Visit Article page'
+          console.log(response.data.articles[i].url)
+          newForm.action = response.data.articles[i].url
         }
-        newThread.className = 'media my-4'
-        newHead.className = 'mt-0 mb-1'
+        newThread.className = 'media listItem my-2 rounded mx-2'
+        newHead.className = 'my-2'
         newDiv.className = 'media-body'
-        newImage.className = 'mr-3 rounded'
+        newImage.className = 'mx-3 my-3 rounded'
         newImage.style = 'max-height: 30%; max-width: 30%;'
         newDiv.style = 'color: white;'
         newHead.style = 'font-family: Roboto Condensed, sans-serif;'
         newText.style = 'font-family: Playfair Display, serif;'
+        newThread.style = "background-color: #1F91D3"
         newDiv.appendChild(newHead)
         newDiv.appendChild(newText)
-        newDiv.appendChild(newLink)
+        newForm.appendChild(newButton)
+        newDiv.appendChild(newForm)
         newThread.appendChild(newImage)
         newThread.appendChild(newDiv)
         list.appendChild(newThread)
@@ -102,16 +108,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (filterArray) {
           for (var i = 0; i < filterArray.length; i++) {
-            let filter = document.createElement('span')
+            let badge = document.createElement('span')
+            let button = document.createElement('span')
+            let image = document.createElement('img')
+            let text = document.createElement('p')
+            let span = document.createElement('span')
             let filterList2 = document.querySelector('.filterList')
-            filter.innerHTML = filterArray[i]
-            filter.className = `badge filter badge-secondary mr-2 mt-2`
-            filter.style = 'font-size: 16px;'
-            filter.addEventListener('click', (event) => {
+            text.innerHTML = filterArray[i]
+            text.className = 'mb-0 mr-1'
+            image.src = 'https://image.flaticon.com/icons/png/128/458/458594.png'
+            image.style = 'height: 20px; width: 20px;'
+            image.className = 'float-left'
+            span.className = 'form-inline'
+            badge.className = `badge float-left filter badge-secondary mt-2 mr-2`
+            badge.style = 'font-size: 16px;'
+            text.addEventListener('click', (event) => {
               userInfo.filter = event.target.innerHTML
               updateFeed(userInfo)
             })
-            filterList2.appendChild(filter)
+            image.addEventListener('click', (event) => {
+              console.log(event.path[1].firstElementChild.innerHTML)
+            })
+            span.appendChild(text)
+            span.appendChild(image)
+            badge.appendChild(span)
+            filterList2.appendChild(badge)
+            filterList2.appendChild(button)
           }
         }
       })

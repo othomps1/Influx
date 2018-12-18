@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #ffffff;
 }
 
 #image {
@@ -12,9 +12,7 @@ a {
   max-height: 300px;
 }
 
-@media max {
 
-}
 
 .submit {
   display: inline-block;
