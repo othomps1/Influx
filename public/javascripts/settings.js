@@ -1,13 +1,11 @@
-const axios = require('axios')
-
 function confirmDelete (user) {
   return axios.delete(`users/${user.id}`)
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const userDelete = document.getElementById('delete-form')
+  const userDelete = document.getElementById('deleteUser')
 
-  userDelete.addEventListener('submit', event => {
+  userDelete.addEventListener('', event => {
     let password = document.getElementById('password').value
     let email = document.getElementById('email').value
 
