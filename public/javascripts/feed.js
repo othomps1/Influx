@@ -233,8 +233,10 @@ updateFeed({
         break;
       case 'English':
         userInfo.language = "en"
+        break;
       case 'Spanish':
         userInfo.language = "es"
+        break;
       case 'French':
         userInfo.language = "fr"
         break;
@@ -243,6 +245,7 @@ updateFeed({
         break;
       case 'Italian':
         userInfo.language = "it"
+        break;
       case 'Dutch':
         userInfo.language = "nl"
         break;
@@ -251,6 +254,7 @@ updateFeed({
         break;
       case 'Portuguese':
         userInfo.language = "pt"
+        break;
       case 'Russian':
         userInfo.language = "ru"
         break;
