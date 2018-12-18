@@ -12,7 +12,6 @@ const check = function() {
     passMatch = false
   }
   if (pass.length >= 8) {
-    console.log(pass.length)
     document.getElementById('message1').style.color = 'white';
     passLength = true
   } else {

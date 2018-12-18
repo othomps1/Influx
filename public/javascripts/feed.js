@@ -180,7 +180,7 @@ updateFeed({
     event.preventDefault()
     const userSearch = document.querySelector('.searchBar')
     if (userSearch.value === '') {
-      userSearch.placeholder = 'Please enter a Filter'
+      userSearch.placeholder = 'Please enter a Tag'
     } else {
       let filterlist3 = document.querySelector('.filterList')
       list.innerHTML = ''
