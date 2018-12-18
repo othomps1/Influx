@@ -289,8 +289,8 @@ updateFeed({
       case 'Fox News':
         userInfo.source = "fox-news"
         break;
-      case 'The Gaurdian':
-        userInfo.source = "the-gaurdian-uk"
+      case 'The Guardian':
+        userInfo.source = "the-guardian-uk"
         break;
       case 'Huffington Post':
         userInfo.source = "the-huffington-post"
