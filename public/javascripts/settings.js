@@ -39,6 +39,7 @@ function changePassword (id, newPassword) {
   })
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   const oldPassword = document.getElementById('exampleInputPassword1').value
   const newPassword = document.getElementById('exampleInputPassword2').value
