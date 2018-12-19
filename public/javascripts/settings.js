@@ -27,18 +27,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
   })
+}) //End of DOM Content
 
-  userDelete.addEventListener('', event => {
-    let password = document.getElementById('password').value
-    let email = document.getElementById('email').value
+function changePassword (id, newPassword) {
+  return axios({
+    method: 'patch',
+    url: `/users/${id}`,
+    data: {
+      password: newPassword
+    }
+  })
+}
 
-    let user = {}
-    user.email = email
-    user.password = password
-    confirmDelete(user)
-      .then(data => {
-        let id = data.id
-        userDelete(id)
+
+document.addEventListener('DOMContentLoaded', function () {
+  const oldPassword = document.getElementById('exampleInputPassword1').value
+  const newPassword = document.getElementById('exampleInputPassword2').value
+  const confirmNewPassword = document.querySelector('form')
+
+  confirmNewPassword.addEventListener('submit', () => {
+    checkLoggedIn()
+      .then(result => {
+        console.log("result",result)
+        if (result.data) {
+          console.log(result.data)
+          changePassword(result.data.user_id, newPassword)
+          .then(()=>{window.location.href = 'settings.html'})
+        } else {
+          window.location.href = 'login.html'
+        }
       })
   })
-})// End of DOM Content
+})
