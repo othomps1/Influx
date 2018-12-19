@@ -1,8 +1,43 @@
+<<<<<<< HEAD
+let passMatch = false
+let passLength = false
+
+const checkLoggedIn = () =>{
+=======
 const checkLoggedIn = () => {
+>>>>>>> a7ccf07c3e412cd646bd6f09f1d2008cfb004b70
   return axios({
     method: 'get',
     url: '/login'
   })
+}
+
+const changePassword = (user_id, userInfo) => {
+  return axios({
+    method: 'patch',
+    url: `/users/${user_id}`,
+    data: userInfo
+  })
+}
+
+
+const check = function() {
+  const pass = document.querySelector('.passwordMustMatch').value
+  const confirm = document.querySelector('.passwordLength8').value
+  if (pass == confirm) {
+    document.getElementById('message2').style.color = 'white';
+    passMatch = true
+  } else {
+    document.getElementById('message2').style.color = 'red';
+    passMatch = false
+  }
+  if (pass.length >= 8) {
+    document.getElementById('message1').style.color = 'white';
+    passLength = true
+  } else {
+    document.getElementById('message1').style.color = 'red';
+    passLength = false
+  }
 }
 
 function confirmDelete (user) {
@@ -13,30 +48,24 @@ function confirmDelete (user) {
 document.addEventListener('DOMContentLoaded', function () {
   const userDelete = document.getElementById('deleteUser')
   const confirmDeleteButton = document.querySelector('#deleteConfirmButton')
-
-  confirmDeleteButton.addEventListener('click', () => {
-    checkLoggedIn()
+  const changePasswordForm =document.querySelector('#changePasswordForm')
+  changePasswordForm.addEventListener('submit', () => {
+    event.preventDefault()
+    if (passMatch && passLength) {
+      let user ={}
+      user.password = document.querySelector('#exampleInputPassword2').value
+      user.newPass2 = document.querySelector('#exampleInputPassword3').value
+      checkLoggedIn()
       .then(result => {
-        if (result) {
-          console.log('test')
-          confirmDelete(result.data.user_id)
-          window.location.href = 'login.html'
-          axios.delete('/login')
-        } else {
-          window.location.href = 'login.html'
-        }
+        changePassword(result.data.user_id, user)
       })
-  })
-}) //End of DOM Content
-
-function changePassword (id, newPassword) {
-  return axios({
-    method: 'patch',
-    url: `/users/${id}`,
-    data: {
-      password: newPassword
+      window.location.href = 'login.html'
+    } else {
+      console.log('Password requirements not met')
     }
   })
+<<<<<<< HEAD
+=======
 }
 
 
@@ -44,15 +73,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const oldPassword = document.getElementById('exampleInputPassword1').value
   const newPassword = document.getElementById('exampleInputPassword2').value
   const confirmNewPassword = document.querySelector('form')
+>>>>>>> a7ccf07c3e412cd646bd6f09f1d2008cfb004b70
 
-  confirmNewPassword.addEventListener('submit', () => {
+  confirmDeleteButton.addEventListener('submit', () => {
     checkLoggedIn()
       .then(result => {
-        console.log("result",result)
-        if (result.data) {
-          console.log(result.data)
-          changePassword(result.data.user_id, newPassword)
-          .then(()=>{window.location.href = 'settings.html'})
+        if (result) {
+          confirmDelete(result.data.user_id)
+          window.location.href = 'login.html'
+          axios.delete('/login')
         } else {
           window.location.href = 'login.html'
         }
