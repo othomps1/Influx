@@ -16,6 +16,12 @@ a.clickHere {
   filter: drop-shadow(8px 8px 5px grey)
 }
 
+.footer {
+  margin-top: 50px;
+  height: 70px;
+  padding-bottom: 50px!important;
+}
+
 .modal-dialog {
   position: absolute;
   top: 300px;
