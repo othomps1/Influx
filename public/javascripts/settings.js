@@ -1,4 +1,4 @@
-const checkLoggedIn = () =>{
+const checkLoggedIn = () => {
   return axios({
     method: 'get',
     url: '/login'
@@ -39,6 +39,7 @@ function changePassword (id, newPassword) {
   })
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   const oldPassword = document.getElementById('exampleInputPassword1').value
   const newPassword = document.getElementById('exampleInputPassword2').value
@@ -56,5 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
           window.location.href = 'login.html'
         }
       })
-  })
+    })
+    document.querySelector('.logout').addEventListener('click', () => {
+      axios.delete('/login')
+      window.location.href = '/login.html'
+    })
 })
