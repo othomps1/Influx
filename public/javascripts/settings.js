@@ -45,6 +45,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const userDelete = document.getElementById('deleteUser')
   const confirmDeleteButton = document.querySelector('#deleteConfirmButton')
   const changePasswordForm =document.querySelector('#changePasswordForm')
+
+  checkLoggedIn()
+    .then(result => {
+      if (result) {
+        let username2 =document.querySelector('.username1')
+        username2.innerHTML = `${result.data.username.charAt(0).toUpperCase()+result.data.username.slice(1)}`
+      }
+    })
+
   changePasswordForm.addEventListener('submit', () => {
     event.preventDefault()
     if (passMatch && passLength) {
@@ -57,7 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       window.location.href = 'login.html'
     } else {
-      console.log('Password requirements not met')
+      let errorPass = document.querySelector('.failedPassword')
+      errorPass.innerHTML = 'Password Requirements not met'
+      errorPass.style = 'font-size: 20px; color: red;'
     }
   })
 
