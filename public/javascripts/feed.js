@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.data.articles[i].url) {
           newButton.type = 'submit'
           newButton.className = 'btn mb-2 btn-secondary'
+          newButton.style = 'background-color: white; color: black'
           newButton.value = 'Visit Article page'
           newForm.action = response.data.articles[i].url
         }
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!checkLoggedIn()) {
           document.querySelector('.username1').innerHTML = 'Login'
         } else {
-          document.querySelector('.username1').innerHTML = `${userInfo.username}`
+          document.querySelector('.username1').innerText = `${userInfo.username.charAt(0).toUpperCase()+userInfo.username.slice(1)}`
         }
         if (filterArray) {
           for (var i = 0; i < filterArray.length; i++) {
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image.className = 'float-left'
             span.className = 'form-inline'
             badge.className = `badge float-left filter badge-secondary mt-2 mr-2`
-            badge.style = 'font-size: 16px;'
+            badge.style = 'font-size: 16px; cursor:pointer; background-color:white; color:black;'
             text.href = '#'
             text.addEventListener('click', (event) => {
               userInfo.filter = event.target.innerHTML
