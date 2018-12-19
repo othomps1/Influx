@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 }) //End of DOM Content
 
 function changePassword (id, newPassword) {
-  console.log(id)
   return axios({
     method: 'patch',
     url: `/users/${id}`,
@@ -40,24 +39,23 @@ function changePassword (id, newPassword) {
   })
 }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const oldPassword = document.getElementById('exampleInputPassword1')
-    const newPassword = document.getElementById('exampleInputPassword2')
-    const confirmNewPassword = document.getElementById('exampleInputPassword3')
-    const passwordChange = document.querySelector('#passwordChange')
 
-    passwordChange.addEventListener('click', () => {
-      checkLoggedIn()
-        .then(result => {
-          if (result) {
-            console.log('test')
-            changePassword(result.data.user_id, newPassword)
-            window.location.href = 'settings.html'
-            axios.patch('/users')
-          } else {
-            window.location.href = 'login.html'
-          }
-        })
+document.addEventListener('DOMContentLoaded', function () {
+  const oldPassword = document.getElementById('exampleInputPassword1').value
+  const newPassword = document.getElementById('exampleInputPassword2').value
+  const confirmNewPassword = document.querySelector('form')
+
+  confirmNewPassword.addEventListener('submit', () => {
+    checkLoggedIn()
+      .then(result => {
+        console.log("result",result)
+        if (result.data) {
+          console.log(result.data)
+          changePassword(result.data.user_id, newPassword)
+          .then(()=>{window.location.href = 'settings.html'})
+        } else {
+          window.location.href = 'login.html'
+        }
       })
     })
 })

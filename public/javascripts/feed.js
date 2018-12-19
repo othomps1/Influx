@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       data: userInfomation3
     })
     .then((response) => {
+      console.log(response.data.articles)
       list.innerHTML = ''
       for (var i = 0; i < response.data.articles.length; i++) {
         let newThread = document.createElement('li')
@@ -138,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             span.className = 'form-inline'
             badge.className = `badge float-left filter badge-secondary mt-2 mr-2`
             badge.style = 'font-size: 16px;'
+            text.href = '#'
             text.addEventListener('click', (event) => {
               userInfo.filter = event.target.innerHTML
               updateFeed(userInfo)
