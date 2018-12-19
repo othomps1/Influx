@@ -2,7 +2,7 @@
 # News-Filtering-App
 # Influx
 
-[Deployed link](http://google.com/)
+[Deployed link](https://influx-news.herokuapp.com/)
 
 ### Wireframes
 [https://xd.adobe.com/view/a83a0405-7fda-4f3e-4ebf-754d4cd6f5da-de0b/]
