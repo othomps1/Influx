@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 let passMatch = false
 let passLength = false
 
 const checkLoggedIn = () =>{
+=======
+const checkLoggedIn = () => {
+>>>>>>> a7ccf07c3e412cd646bd6f09f1d2008cfb004b70
   return axios({
     method: 'get',
     url: '/login'
@@ -60,6 +64,16 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('Password requirements not met')
     }
   })
+<<<<<<< HEAD
+=======
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const oldPassword = document.getElementById('exampleInputPassword1').value
+  const newPassword = document.getElementById('exampleInputPassword2').value
+  const confirmNewPassword = document.querySelector('form')
+>>>>>>> a7ccf07c3e412cd646bd6f09f1d2008cfb004b70
 
   confirmDeleteButton.addEventListener('submit', () => {
     checkLoggedIn()
@@ -72,5 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
           window.location.href = 'login.html'
         }
       })
-  })
+    })
+    document.querySelector('.logout').addEventListener('click', () => {
+      axios.delete('/login')
+      window.location.href = '/login.html'
+    })
 })

@@ -19,7 +19,7 @@ router.post('/', (req, res, next) => {
   } else if (!req.body.password||!req.body.password.trim()) {
     res.json({
       status: 404,
-      message: 'must have an password!'
+      message: 'must have a password!'
   })}
 
   return knex('users')
@@ -102,7 +102,6 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.patch('/:id', (req, res, next) => {
-  console.log(req.body.password)
   knex('users')
     .where('users.id',req.params.id)
     .update({
