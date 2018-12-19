@@ -20,6 +20,7 @@ a.clickHere {
   margin-top: 50px;
   height: 70px;
   padding-bottom: 50px!important;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .modal-dialog {
