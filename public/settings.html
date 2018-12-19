@@ -12,7 +12,7 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1972A4;">
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #1972A4;">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,9 +23,9 @@
           </a>
           <strong><a class="nav-item username1 nav-link mx-2" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Username</a></strong>
           <a class="nav-item nav-link mx-2" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">|</a>
-          <a class="nav-item nav-link mx-2" href="/feed.html" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">News Feed</a>
+          <a class="nav-item nav-link mx-2" href="/feed.html" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Back to News Feed</a>
           <a class="nav-item nav-link mx-2" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">|</a>
-          <a class="nav-item logout nav-link mx-2" href="/login.html" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Logout</a>
+          <a class="nav-item logout nav-link mx-2" href="#" style="font-size: 30px; color: white; font-family: 'Roboto Condensed', sans-serif">Logout</a>
         </div>
       </div>
     </nav>
@@ -33,11 +33,11 @@
     <body class="" style="background-color: #ffffff;">
       <div class="row container-fluid justify-content-center">
         <div class="col" id="image">
-          <img src="images/logo.png" class="rounded-circle img-fluid  dropshadow mt-3" alt="Influx">
+          <img src="images/logo.png" class="rounded-circle img-fluid dropshadow mt-3" alt="Influx">
         </div>
       </div>
       <div class="container mt-5">
-        <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff; font-family:'Playfair Display', serif;">
+        <div class="col-6 offset-3" style="-webkit-border-radius: 10px; border-radius: 10px; background-color: #1972A4; color: #ffffff; font-family:'Playfair Display', serif; padding: 20px;">
 
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary container-fluid my-3" data-toggle="modal" data-target="#deleteUser">
@@ -66,17 +66,26 @@
           </div>
 
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary container-fluid my-3" data-toggle="modal" data-target="#changePassword" >
+          <button type="button" class="btn btn-primary container-fluid my-3" data-toggle="modal" data-target="#changePassword">
             Change Password
           </button>
 
         </div>
       </div>
+    </div>
+  </div>
 
 
+
+          <form>
           <form id="changePasswordForm">
 
           <!-- Modal -->
+          <footer class="footer text-faded text-center py-5"style="background-color: #1972A4;color: white;">
+            <div class="container">
+              <p class="m-0 small"><h6>Copyright &copy; Influx 2018</h6></p>
+            </div>
+          </footer>
           <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div class="modal-dialog" role="document">
               <div class="modal-content" style="background-color: #1972A4; font-family:'Playfair Display', serif;">
@@ -91,39 +100,31 @@
                     <h2 class="failedPassword"></h2>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Old Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-                  </div>
-                  <div class="errTextDiv">
-
-                  </div>
-                </div>
-                <div class="modal-body" style="background-color: #1972A4; color: #ffffff; font-family:'Playfair Display', serif; font-weight: 900; text-align: center;">
-                  <div class="form-group">
                     <label for="exampleInputPassword2">New Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                    <input type="password" class="form-control passwordLength8" id="exampleInputPassword2" onkeyup='check();' placeholder="Password" required>
+                    <li id="message1">Password must be longer than 8 characters</li>
                   </div>
                   <div class="errTextDiv">
 
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword3">Confirm New Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" required>
-                    <li>Passwords must match</li>
+                    <input type="password" class="form-control passwordMustMatch" id="exampleInputPassword3" onkeyup='check();' placeholder="Password" required>
+                    <li id="message2" >Passwords must match</li>
                   </div>
                   <div class="errTextDiv">
 
                   </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <button type="submit" onClick="changePassword()" id="confirmNewPassword" class="btn btn-primary" style="background-color: red" >Change</button>
+                  <button type="submit" id="confirmNewPassword" class="btn btn-primary" style="background-color: red" >Change</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
         </form>
+
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
