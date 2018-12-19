@@ -12,6 +12,10 @@ a.clickHere {
   max-height: 300px;
 }
 
+.dropshadow{
+  filter: drop-shadow(8px 8px 5px grey)
+}
+
 .modal-dialog {
   position: absolute;
   top: 300px;
