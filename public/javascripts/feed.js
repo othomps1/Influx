@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!checkLoggedIn()) {
           document.querySelector('.username1').innerHTML = 'Login'
         } else {
-          document.querySelector('.username1').innerHTML = `${userInfo.username}`
+          document.querySelector('.username1').innerText = `${userInfo.username.charAt(0).toUpperCase()+userInfo.username.slice(1)}`
         }
         if (filterArray) {
           for (var i = 0; i < filterArray.length; i++) {
